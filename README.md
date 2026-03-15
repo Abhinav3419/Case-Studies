@@ -22,13 +22,12 @@
 
 <br>
 
-## `// what is this?`
+## `// What will you Get Here?`
 
-A growing collection of original product case studies — each one solves a real problem for a real company using a unique lens that hasn't been tried before. No recycled frameworks. No textbook answers. Every solution here is built from first principles.
-
+A growing collection of original product case studies — each one solves a real problem for a real company using a unique lens that hasn't been tried before. No recycled frameworks. No textbook answers. Every solution here is built from first principles. Don't be surprised if these concepts start appearing in a Researcher’s thesis without a citation—it’s just that good.
 <br>
 
-## `// case studies`
+## `// Case Studies`
 
 <table>
 <tr>
@@ -64,7 +63,7 @@ Six data-driven features that bridge the emotional gap between physical books an
 
 **Google** · PM × Applied Physics × ML
 
-> *"The sun equation has a weak link. We fixed it with atmospheric physics."*
+> *"The sun equation has a weak link. I fixed it with atmospheric physics."*
 
 Corrects the fundamental Climatological Coefficient (Wc) in the solar energy equation by introducing two novel multipliers: the **Pressure Belt Multiplier (Pb)** based on global circulation cells and the **Marine Coastal Distance Correction (Mc)** using exponential decay modeling.
 
@@ -87,7 +86,7 @@ Corrects the fundamental Climatological Coefficient (Wc) in the solar energy equ
 
 **Netflix** · PM × Behavioral Psychology × Sensor Engineering
 
-> *"Netflix knows what you watched. It doesn't know what you're feeling."*
+> *"Netflix knows what you watched. It doesn't know what you're feeling and what's your Vibe right now."*
 
 Four context-aware features that extend personalization beyond the algorithm into the viewer's real world: **Gen-Pulse** (generational social proof), **Sense-Stream** (scene-synced haptic feedback), **Atmosphere** (weather-responsive UI), and **Pulse-Rec** (biometric mood sensing from wearables).
 
