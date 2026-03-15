@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kindle Physical Book Aesthetics — Interactive Prototype v3</title>
+<style>
+  :root{--bg:#FFFFFF;--bg2:#F5F5F0;--tx:#1a1a1a;--tx2:#666;--tx3:#999;--bd:rgba(0,0,0,0.12);--ac:#C75B12;--pg:#FDFBF7;--sr:Georgia,'Times New Roman',serif;--sn:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--rd:10px;}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg2:#252520;--tx:#e8e8e0;--tx2:#aaa;--tx3:#777;--bd:rgba(255,255,255,0.1);--pg:#2C2A24;}}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--sn);background:var(--bg);color:var(--tx);padding:20px;max-width:960px;margin:0 auto;}
+  h1{font-size:22px;font-weight:500;margin-bottom:4px;}
+  .sub{font-size:13px;color:var(--tx2);margin-bottom:20px;}
+  .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px;}
+  .sc{background:var(--bg2);border-radius:var(--rd);padding:10px 14px;}
+  .sl{font-size:11px;color:var(--tx3);}
+  .sv{font-size:20px;font-weight:500;margin-top:2px;}
+  .cr{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .cr button{font-family:var(--sn);font-size:13px;padding:7px 16px;background:transparent;color:var(--tx);border:1px solid var(--bd);border-radius:6px;cursor:pointer;transition:background 0.15s;}
+  .cr button:hover{background:var(--bg2);}
+  .cr button:active{transform:scale(0.97);}
+  #sb{font-size:13px;color:var(--tx2);margin-bottom:10px;min-height:20px;}
+  .bw{position:relative;width:100%;aspect-ratio:3/2;border-radius:var(--rd);overflow:hidden;border:1px solid var(--bd);transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);}
+  .bvp{display:flex;width:100%;height:100%;position:relative;transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);}
+  .pg{flex:1;position:relative;overflow:hidden;background-color:var(--pg);transition:background-color 1s ease;}
+  .pg canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .pg .wl{position:absolute;inset:0;pointer-events:none;z-index:3;}
+  .ct{position:relative;z-index:4;}
+  .ch{font-size:12px;color:var(--tx3);margin-bottom:16px;font-family:var(--sr);letter-spacing:0.5px;}
+  .bt{font-size:16px;line-height:1.9;color:var(--tx);font-family:var(--sr);}
+  .pno{position:absolute;bottom:24px;right:36px;font-size:12px;color:var(--tx3);z-index:5;}
+  .sp{position:absolute;left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%);z-index:10;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,0.05),rgba(0,0,0,0.13),rgba(0,0,0,0.05));}
+  @media(prefers-color-scheme:dark){.sp{background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.07),rgba(255,255,255,0.02));}}
+  .tbar{position:absolute;bottom:0;left:0;right:0;height:20px;z-index:20;cursor:pointer;display:flex;}
+  .trd{height:100%;background:#C4B69C;transition:flex 0.4s;}
+  .tmk{width:3px;height:100%;background:#E24B4A;z-index:1;flex-shrink:0;}
+  .tur{height:100%;background:#E8DFD0;transition:flex 0.4s;}
+  @media(prefers-color-scheme:dark){.trd{background:#5E5545;}.tur{background:#6B6050;}}
+  .tov{position:absolute;right:0;top:0;bottom:20px;width:0;z-index:15;overflow:hidden;pointer-events:none;}
+  .tin{position:absolute;right:0;top:0;bottom:0;width:100%;transform-origin:right center;background:linear-gradient(90deg,rgba(0,0,0,0.04) 0%,var(--pg) 8%,#F5F0E8 100%);}
+  @media(prefers-color-scheme:dark){.tin{background:linear-gradient(90deg,rgba(255,255,255,0.02) 0%,var(--pg) 8%,#25231E 100%);}}
+  .ft{margin-top:10px;display:flex;justify-content:space-between;font-size:12px;color:var(--tx3);}
+  .wd{position:absolute;border-radius:50%;pointer-events:none;z-index:2;}
+  .cf{position:absolute;z-index:5;pointer-events:none;width:0;height:0;}
+</style>
+</head>
+<body>
+
+<h1>Kindle: Physical book aesthetics</h1>
+<p class="sub">Interactive prototype v3 — 6 data-driven features with directional ink seepage and realistic page-turn sound</p>
+
+<div class="sg">
+  <div class="sc"><div class="sl">Usage wear</div><div class="sv" id="s-w">Pristine</div></div>
+  <div class="sc"><div class="sl">Page age</div><div class="sv" id="s-a">0s</div></div>
+  <div class="sc"><div class="sl">Drops</div><div class="sv" id="s-d">0</div></div>
+  <div class="sc"><div class="sl">Pages turned</div><div class="sv" id="s-t">0</div></div>
+</div>
+
+<div class="cr">
+  <button id="b-d">Drop tablet</button>
+  <button id="b-sl">Scribble left page</button>
+  <button id="b-sr">Scribble right page</button>
+  <button id="b-t">Turn page</button>
+  <button id="b-f">Flip tablet</button>
+  <button id="b-r">Reset</button>
+</div>
+
+<div id="sb">Real-time aging active — interact to accumulate wear</div>
+
+<div class="bw" id="bk">
+  <div class="bvp" id="vp">
+    <div class="sp" id="spe"></div>
+
+    <div class="pg" id="pl" style="padding:36px 28px 36px 36px;">
+      <canvas id="c-wl" style="z-index:2;"></canvas>
+      <canvas id="c-il" style="z-index:1;opacity:0.2;"></canvas>
+      <canvas id="c-sl" style="z-index:6;"></canvas>
+      <div class="wl" id="wl"></div>
+      <div class="ct">
+        <div class="ch">CHAPTER 4 — THE READING MIND</div>
+        <p class="bt">The act of reading is not passive reception but active construction. Each sentence you encounter triggers a cascade of neural connections, linking new information to existing mental models. The brain does not simply decode symbols — it builds worlds. Every paragraph rewires your neurons, creating pathways that persist long after the book is closed.</p>
+      </div>
+      <div class="pno" id="nl">42</div>
+    </div>
+
+    <div class="pg" id="pr" style="padding:36px 36px 36px 28px;">
+      <canvas id="c-wr" style="z-index:2;"></canvas>
+      <canvas id="c-ir" style="z-index:1;opacity:0.2;"></canvas>
+      <canvas id="c-sr" style="z-index:6;"></canvas>
+      <div class="wl" id="wr"></div>
+      <div class="ct">
+        <p class="bt" style="margin-bottom:18px;">Research by Maryanne Wolf demonstrates that deep reading activates regions far beyond the visual cortex. The temporal and frontal lobes engage in meaning-making, empathy circuits fire during narrative, and the cerebellum tracks the rhythm of prose.</p>
+        <p class="bt">This is why a physical book feels different from a screen — the tactile feedback, the weight of pages turned, the smell of paper all contribute to what cognitive scientists call <em>embodied cognition</em>. The sensory experience is inseparable from comprehension.</p>
+      </div>
+      <div class="pno" id="nr">43</div>
+    </div>
+  </div>
+
+  <div class="tbar" id="tb">
+    <div class="trd" id="tr"></div>
+    <div class="tmk"></div>
+    <div class="tur" id="tu"></div>
+  </div>
+
+  <div class="tov" id="to">
+    <div class="tin" id="tii"></div>
+  </div>
+</div>
+
+<div class="ft">
+  <span>Page <span id="pn">42</span> of 312</span>
+  <span id="al">New book — aging live</span>
+</div>
+
+<script>
+const S={drops:0,turns:0,flipped:false,page:42,total:312,wearLevel:0,startTime:Date.now(),scribbles:0};
+const dk=()=>window.matchMedia('(prefers-color-scheme:dark)').matches;
+const $=id=>document.getElementById(id);
+
+const ageRamp=[
+  {bg:'#FDFBF7',dk:'#2C2A24',t:0},{bg:'#FBF7EE',dk:'#2E2B23',t:10},{bg:'#F8F2E4',dk:'#302D21',t:30},
+  {bg:'#F5ECDA',dk:'#35301F',t:60},{bg:'#F0E4CC',dk:'#38321D',t:120},{bg:'#EBD9BB',dk:'#3B341B',t:240},
+  {bg:'#E5CDA8',dk:'#3E3619',t:420},{bg:'#DDBF92',dk:'#413818',t:660},{bg:'#D4AE7A',dk:'#443A17',t:900},
+  {bg:'#CABC88',dk:'#473C16',t:1200}
+];
+function fmt(s){if(s<60)return Math.round(s)+'s';if(s<3600)return Math.round(s/60)+'m '+Math.round(s%60)+'s';return Math.round(s/3600)+'h '+Math.round((s%3600)/60)+'m';}
+function albl(s){if(s<10)return'Brand new';if(s<30)return'Barely used';if(s<60)return'Few weeks old';if(s<120)return'Couple months';if(s<240)return'~6 months';if(s<420)return'~1 year';if(s<660)return'~3 years';if(s<900)return'~5 years';if(s<1200)return'~10 years';return'Vintage (20+ yrs)';}
+function lerp(a,b,t){const h=s=>parseInt(s,16);const r=Math.round(h(a.slice(1,3))+(h(b.slice(1,3))-h(a.slice(1,3)))*t);const g=Math.round(h(a.slice(3,5))+(h(b.slice(3,5))-h(a.slice(3,5)))*t);const bl=Math.round(h(a.slice(5,7))+(h(b.slice(5,7))-h(a.slice(5,7)))*t);return'#'+[r,g,bl].map(v=>Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');}
+
+function updateAge(){
+  const el=(Date.now()-S.startTime)/1000;$('s-a').textContent=fmt(el);$('al').textContent=albl(el)+' — aging live';
+  const d=dk();let col;
+  for(let i=0;i<ageRamp.length-1;i++){if(el>=ageRamp[i].t&&el<ageRamp[i+1].t){const f=(el-ageRamp[i].t)/(ageRamp[i+1].t-ageRamp[i].t);col=lerp(d?ageRamp[i].dk:ageRamp[i].bg,d?ageRamp[i+1].dk:ageRamp[i+1].bg,f);break;}}
+  if(!col){const l=ageRamp[ageRamp.length-1];col=d?l.dk:l.bg;}
+  $('pl').style.backgroundColor=col;$('pr').style.backgroundColor=col;
+}
+
+function uTh(){const r=S.page/S.total;$('tr').style.flex=r;$('tu').style.flex=1-r;$('pn').textContent=S.page;$('nl').textContent=S.page;$('nr').textContent=S.page+1;}
+uTh();
+
+$('tb').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();const ratio=(e.clientX-r.left)/r.width;S.page=Math.max(2,Math.min(S.total-1,Math.round(ratio*S.total)));if(S.page%2!==0)S.page--;uTh();$('sb').textContent='Jumped to page '+S.page;});
+
+const wL=['Pristine','Light use','Well-read','Dog-eared','Battle-scarred','Falling apart'];
+function cW(){const sc=S.drops*3+S.turns*0.5+S.scribbles*2;if(sc<2)return 0;if(sc<8)return 1;if(sc<20)return 2;if(sc<40)return 3;if(sc<70)return 4;return 5;}
+
+function addCF(ct,n){const cs=['top-left','top-right','bottom-left','bottom-right'];for(let i=0;i<Math.min(n,4);i++){const c=cs[i];const el=document.createElement('div');el.className='cf';const sz=10+Math.random()*16;const d=dk();const cl=d?'rgba(255,255,255,0.06)':'rgba(160,130,80,0.12)';if(c==='top-right')el.style.cssText='top:0;right:0;border-top:'+sz+'px solid '+cl+';border-left:'+sz+'px solid transparent;';else if(c==='bottom-right')el.style.cssText='bottom:0;right:0;border-bottom:'+sz+'px solid '+cl+';border-left:'+sz+'px solid transparent;';else if(c==='top-left')el.style.cssText='top:0;left:0;border-top:'+sz+'px solid '+cl+';border-right:'+sz+'px solid transparent;';else el.style.cssText='bottom:0;left:0;border-bottom:'+sz+'px solid '+cl+';border-right:'+sz+'px solid transparent;';ct.appendChild(el);}}
+function addEW(ct){const d=dk();for(let i=0;i<6;i++){const dot=document.createElement('div');dot.className='wd';const edge=Math.floor(Math.random()*4);const s=2+Math.random()*5;let x,y;if(edge===0){x=Math.random()*100;y=Math.random()*4;}else if(edge===1){x=Math.random()*100;y=96+Math.random()*4;}else if(edge===2){x=Math.random()*4;y=Math.random()*100;}else{x=96+Math.random()*4;y=Math.random()*100;}dot.style.cssText='left:'+x+'%;top:'+y+'%;width:'+s+'px;height:'+s+'px;background:'+(d?'rgba(255,255,255,0.04)':'rgba(120,90,40,0.06)')+';';ct.appendChild(dot);}}
+function addSC(){const d=dk();const cr=document.createElement('div');cr.style.cssText='position:absolute;left:0;right:0;top:'+(10+Math.random()*80)+'%;height:1px;background:'+(d?'rgba(255,255,255,0.08)':'rgba(100,70,30,0.1)')+';';$('spe').appendChild(cr);}
+function uW(){const lv=cW();if(lv>S.wearLevel){S.wearLevel=lv;if(lv>=2){addEW($('wl'));addEW($('wr'));}if(lv>=3){addCF($('wl'),lv-2);addCF($('wr'),lv-2);}if(lv>=2)addSC();}$('s-w').textContent=wL[Math.min(lv,5)];}
+
+function dWr(cid,count){const cv=$(cid);const r=cv.parentElement.getBoundingClientRect();cv.width=r.width*2;cv.height=r.height*2;cv.style.width=r.width+'px';cv.style.height=r.height+'px';const ctx=cv.getContext('2d');ctx.scale(2,2);const d=dk();for(let i=0;i<count;i++){const x1=Math.random()*r.width;const y1=Math.random()*r.height;const len=30+Math.random()*90;const ang=Math.random()*Math.PI;ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(x1+len*0.5*Math.cos(ang)+(Math.random()-0.5)*25,y1+len*0.5*Math.sin(ang)+(Math.random()-0.5)*25,x1+len*Math.cos(ang),y1+len*Math.sin(ang));ctx.strokeStyle=d?'rgba(255,255,255,0.06)':'rgba(110,90,60,0.09)';ctx.lineWidth=0.4+Math.random()*0.6;ctx.stroke();}for(let i=0;i<Math.floor(count/2);i++){ctx.beginPath();ctx.arc(Math.random()*r.width,Math.random()*r.height,2+Math.random()*10,0,Math.PI*2);ctx.fillStyle=d?'rgba(255,255,255,0.025)':'rgba(90,70,40,0.035)';ctx.fill();}}
+
+$('b-d').addEventListener('click',()=>{S.drops++;$('s-d').textContent=S.drops;const bk=$('bk');bk.style.transition='none';bk.style.transform='translateY(14px) rotate('+(Math.random()>0.5?2.5:-2.5)+'deg)';setTimeout(()=>{bk.style.transition='transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';bk.style.transform='translateY(0) rotate(0)';},120);dWr('c-wl',3+S.drops*2);dWr('c-wr',3+S.drops*2);uW();$('sb').textContent='Dropped! '+S.drops+' impact(s) — wear: '+wL[Math.min(cW(),5)];});
+
+const aC=new(window.AudioContext||window.webkitAudioContext)();
+function playTurn(){
+  const dur=0.55;const sr=aC.sampleRate;const buf=aC.createBuffer(2,sr*dur,sr);
+  for(let ch=0;ch<2;ch++){const d=buf.getChannelData(ch);for(let i=0;i<d.length;i++){const t=i/sr;
+    const lift=Math.exp(-t*6)*Math.sin(t*120)*0.15;
+    const crinkle=(Math.random()*2-1)*Math.exp(-t*8)*0.25;
+    const snap=(t>0.08&&t<0.15)?Math.sin((t-0.08)*2800)*Math.exp(-(t-0.08)*40)*0.3:0;
+    const settle=(t>0.15)?((Math.random()*2-1)*Math.exp(-(t-0.15)*12)*0.1):0;
+    const fiber=(Math.random()*2-1)*Math.exp(-t*10)*0.05*Math.sin(t*3500);
+    d[i]=lift+crinkle+snap+settle+fiber+(Math.random()-0.5)*0.005;}}
+  const src=aC.createBufferSource();src.buffer=buf;
+  const lp=aC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=4000;lp.Q.value=0.4;
+  const hp=aC.createBiquadFilter();hp.type='highpass';hp.frequency.value=200;hp.Q.value=0.3;
+  src.connect(hp);hp.connect(lp);lp.connect(aC.destination);src.start();
+}
+
+$('b-t').addEventListener('click',()=>{if(aC.state==='suspended')aC.resume();S.turns++;$('s-t').textContent=S.turns;playTurn();const ov=$('to');ov.style.width='45%';ov.style.transition='width 0.45s cubic-bezier(0.4,0,0.2,1)';$('tii').style.transform='perspective(800px) rotateY(-25deg)';$('tii').style.transition='transform 0.45s cubic-bezier(0.4,0,0.2,1)';setTimeout(()=>{ov.style.transition='width 0.3s ease-in';ov.style.width='0';$('tii').style.transition='transform 0.3s ease-in';$('tii').style.transform='perspective(800px) rotateY(0)';S.page=Math.min(S.page+2,S.total);uTh();},450);uW();$('sb').textContent='Page turned ('+S.turns+' total) — hear the paper crinkle and snap';});
+
+function drawScrib(scribCv,bleedCv){
+  const cv=$(scribCv);const r=cv.parentElement.getBoundingClientRect();
+  cv.width=r.width*2;cv.height=r.height*2;cv.style.width=r.width+'px';cv.style.height=r.height+'px';
+  const ctx=cv.getContext('2d');ctx.scale(2,2);const d=dk();
+  const sx=30+Math.random()*80;const sy=50+Math.random()*80;
+  ctx.strokeStyle=d?'rgba(120,180,255,0.7)':'rgba(30,80,180,0.65)';ctx.lineWidth=1.5;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(sx,sy);
+  for(let i=0;i<8;i++)ctx.quadraticCurveTo(sx+40+i*18+(Math.random()-0.5)*20,sy-8+(Math.random()-0.5)*16,sx+50+i*20,sy+(Math.random()-0.5)*12);
+  ctx.stroke();
+  const underX=sx-5+Math.random()*20;const underY=sy+28+Math.random()*15;
+  ctx.beginPath();ctx.moveTo(underX,underY);ctx.lineTo(underX+80+Math.random()*60,underY+(Math.random()-0.5)*4);ctx.strokeStyle=d?'rgba(120,180,255,0.5)':'rgba(30,80,180,0.45)';ctx.lineWidth=1.2;ctx.stroke();
+  ctx.font='italic 14px Georgia,serif';ctx.fillStyle=d?'rgba(120,180,255,0.65)':'rgba(30,80,180,0.55)';
+  const notes=['Important!','Review this','Key concept','Remember!','Exam topic'];
+  ctx.fillText(notes[Math.floor(Math.random()*notes.length)],sx+10,sy+24);
+
+  const cv2=$(bleedCv);const r2=cv2.parentElement.getBoundingClientRect();
+  cv2.width=r2.width*2;cv2.height=r2.height*2;cv2.style.width=r2.width+'px';cv2.style.height=r2.height+'px';
+  const ctx2=cv2.getContext('2d');ctx2.scale(2,2);
+  ctx2.save();ctx2.translate(r2.width,0);ctx2.scale(-1,1);
+  const mx=r2.width-sx;
+  ctx2.strokeStyle=d?'rgba(120,180,255,0.08)':'rgba(30,80,180,0.06)';ctx2.lineWidth=2;ctx2.lineCap='round';
+  ctx2.beginPath();ctx2.moveTo(mx-40,sy);
+  for(let i=0;i<8;i++)ctx2.quadraticCurveTo(mx-80-i*18+(Math.random()-0.5)*8,sy-3+(Math.random()-0.5)*6,mx-90-i*20,sy+(Math.random()-0.5)*5);
+  ctx2.stroke();
+  ctx2.beginPath();ctx2.moveTo(mx-45+Math.random()*10,underY);ctx2.lineTo(mx-45-80-Math.random()*40,underY+(Math.random()-0.5)*3);ctx2.strokeStyle=d?'rgba(120,180,255,0.05)':'rgba(30,80,180,0.04)';ctx2.lineWidth=1.4;ctx2.stroke();
+  ctx2.font='italic 14px Georgia,serif';ctx2.fillStyle=d?'rgba(120,180,255,0.06)':'rgba(30,80,180,0.04)';
+  ctx2.fillText('...faint impression...',mx-60,sy+24);
+  ctx2.restore();
+}
+
+$('b-sl').addEventListener('click',()=>{S.scribbles++;drawScrib('c-sl','c-ir');uW();$('sb').textContent='Scribbled on LEFT page (even, pg '+S.page+') — ink seeps to NEXT page (right)';});
+$('b-sr').addEventListener('click',()=>{S.scribbles++;drawScrib('c-sr','c-il');uW();$('sb').textContent='Scribbled on RIGHT page (odd, pg '+(S.page+1)+') — ink seeps to PREVIOUS page (left)';});
+
+$('b-f').addEventListener('click',()=>{S.flipped=!S.flipped;$('vp').style.transform=S.flipped?'rotate(180deg)':'rotate(0deg)';$('sb').textContent=S.flipped?'Flipped — gravity-consistent orientation':'Restored to normal';});
+
+$('b-r').addEventListener('click',()=>{S.drops=0;S.turns=0;S.flipped=false;S.page=42;S.wearLevel=0;S.scribbles=0;S.startTime=Date.now();const d=dk();$('pl').style.backgroundColor=d?'#2C2A24':'#FDFBF7';$('pr').style.backgroundColor=d?'#2C2A24':'#FDFBF7';['c-wl','c-wr','c-sl','c-sr','c-il','c-ir'].forEach(id=>{const c=$(id);c.getContext('2d').clearRect(0,0,c.width,c.height);});$('vp').style.transform='rotate(0deg)';$('wl').innerHTML='';$('wr').innerHTML='';$('spe').querySelectorAll('div').forEach(d=>d.remove());$('s-w').textContent='Pristine';$('s-a').textContent='0s';$('s-d').textContent='0';$('s-t').textContent='0';uTh();$('sb').textContent='Reset — pristine. Aging restarts now.';});
+
+setInterval(updateAge,1000);updateAge();
+</script>
+</body>
+</html>
