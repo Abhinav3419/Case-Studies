@@ -1,6 +1,6 @@
 <div align="center">
 
-# `> Case-Studies_`
+# `> Case-Studies <`
 
 ### Product Strategy & Innovation Portfolio
 
@@ -12,7 +12,7 @@
 <br>
 
 *Building product solutions at the intersection of*
-*physics, behavioral science, and engineering*
+*Physics, Behavioural Science, and Engineering*
 
 <br>
 
@@ -22,9 +22,10 @@
 
 <br>
 
-## `// What will you Get Here?`
+## `// What will you get here?`
 
 A growing collection of original product case studies — each one solves a real problem for a real company using a unique lens that hasn't been tried before. No recycled frameworks. No textbook answers. Every solution here is built from first principles. Don't be surprised if these concepts start appearing in a Researcher’s thesis without a citation—it’s just that good.
+
 <br>
 
 ## `// Case Studies`
@@ -42,7 +43,7 @@ A growing collection of original product case studies — each one solves a real
 
 **Amazon** · Product Management
 
-> *"What if your Kindle page wrinkled when you dropped it, yellowed with age, and rustled when you turned it?"*
+> *"What if your Kindle page wrinkled when you dropped it, yellowed with age, and rustled when you turned it, pages gets smudged when handled carelessly?"*
 
 Six data-driven features that bridge the emotional gap between physical books and digital reading — drop-impact wrinkling, time-based yellowing, ink bleed-through, page-turn sound synthesis, functional thickness bar, and gravity-responsive orientation.
 
@@ -84,9 +85,9 @@ Corrects the fundamental Climatological Coefficient (Wc) in the solar energy equ
 
 ### [Netflix: Sensory Personalization](./03-Netflix-Sensory-Personalization/)
 
-**Netflix** · PM × Behavioral Psychology × Sensor Engineering
+**Netflix** · PM × Behavioural Psychology × Sensor Engineering
 
-> *"Netflix knows what you watched. It doesn't know what you're feeling and what's your Vibe right now."*
+> *"Netflix knows what you watched. It doesn't know what you're feeling or what's your Vibe right now or how's weather around you?"*
 
 Four context-aware features that extend personalization beyond the algorithm into the viewer's real world: **Gen-Pulse** (generational social proof), **Sense-Stream** (scene-synced haptic feedback), **Atmosphere** (weather-responsive UI), and **Pulse-Rec** (biometric mood sensing from wearables).
 
@@ -99,7 +100,7 @@ Four context-aware features that extend personalization beyond the algorithm int
 
 <br>
 
-## `// repo structure`
+## `// Repo Structure`
 
 ```
 Case-Studies/
@@ -125,7 +126,7 @@ Case-Studies/
 
 <br>
 
-## `// frameworks used`
+## `// Frameworks Used`
 
 | Framework | What it does | Where |
 |:----------|:-------------|:------|
