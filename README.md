@@ -175,7 +175,7 @@ Case-Studies/
 
 ---
 
-**Built with curiosity. Shipped with conviction.**
+**Built with curiosity. Delivered with conviction.**
 
 [![GitHub](https://img.shields.io/badge/Follow-@Abhinav3419-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 
