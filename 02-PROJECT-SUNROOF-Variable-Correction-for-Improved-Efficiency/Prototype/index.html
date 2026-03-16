@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Sunroof 2.0 — Atmospheric Correction Visualizer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#06090F;--bg2:#0C1220;--bg3:#121C2E;--card:rgba(10,16,28,0.92);
+  --tx:#E2E8F0;--tx2:#7B8CA6;--tx3:#3E4C63;
+  --solar:#FFB300;--solar2:#FFD54F;--solar3:#FF8F00;--solarglow:rgba(255,179,0,0.12);
+  --green:#2ECC71;--blue:#3498DB;--red:#E74C3C;--purple:#8E44AD;
+  --border:rgba(255,255,255,0.05);--mono:'JetBrains Mono',monospace;--sans:'Space Grotesk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);overflow-x:hidden;min-height:100vh;}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+.app{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:16px 20px 40px;}
+
+.hdr{text-align:center;padding:20px 0 8px;}
+.hdr h1{font-family:var(--mono);font-size:clamp(18px,3vw,28px);font-weight:700;letter-spacing:-0.5px;}
+.hdr h1 em{font-style:normal;color:var(--solar);}
+.hdr h1 span{color:var(--green);}
+.hdr p{color:var(--tx2);font-size:13px;margin-top:4px;font-family:var(--mono);}
+
+.tabs{display:flex;justify-content:center;gap:3px;margin:16px auto 0;max-width:420px;background:var(--bg2);border-radius:10px;padding:3px;border:1px solid var(--border);}
+.tab{flex:1;padding:9px 12px;text-align:center;font-family:var(--mono);font-size:12px;font-weight:500;color:var(--tx2);background:transparent;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;}
+.tab.active{background:var(--bg3);color:var(--solar);box-shadow:0 0 24px rgba(255,179,0,0.06);}
+.tab:hover:not(.active){color:var(--tx);}
+
+.layout{display:flex;gap:20px;margin-top:16px;align-items:flex-start;flex-wrap:wrap;}
+.viz{flex:1.3;min-width:360px;display:flex;flex-direction:column;align-items:center;}
+.ctrl{flex:1;min-width:300px;}
+
+canvas#earth{width:100%;max-width:480px;aspect-ratio:1;border-radius:50%;cursor:grab;}
+canvas#earth:active{cursor:grabbing;}
+
+.formula-bar{width:100%;max-width:480px;margin-top:12px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-align:center;font-family:var(--mono);font-size:13px;color:var(--tx2);}
+.formula-bar b{color:var(--solar);}
+.formula-bar .val{color:var(--green);font-weight:700;}
+
+.output-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%;max-width:480px;margin-top:10px;}
+.ocard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center;}
+.ocard .label{font-size:10px;color:var(--tx3);font-family:var(--mono);text-transform:uppercase;letter-spacing:1px;}
+.ocard .num{font-size:22px;font-weight:700;font-family:var(--mono);margin-top:2px;}
+
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px;transition:opacity 0.3s,transform 0.3s;}
+.panel.hidden{display:none;}
+.panel h3{font-family:var(--mono);font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.panel h3 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+.field{margin-bottom:14px;}
+.field label{display:flex;justify-content:space-between;font-size:12px;color:var(--tx2);font-family:var(--mono);margin-bottom:5px;}
+.field label span{color:var(--solar);font-weight:700;}
+.field input[type=range]{width:100%;height:6px;-webkit-appearance:none;background:var(--bg3);border-radius:3px;outline:none;cursor:pointer;}
+.field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid var(--bg);box-shadow:0 0 10px rgba(255,179,0,0.3);}
+.pb-range::-webkit-slider-thumb{background:var(--solar);}
+.mc-range::-webkit-slider-thumb{background:var(--green);}
+.lat-range::-webkit-slider-thumb{background:var(--blue);}
+.coast-range::-webkit-slider-thumb{background:var(--purple);}
+
+.zone-badge{display:inline-block;font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:6px;margin-top:4px;border:1px solid;}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.preset{font-family:var(--mono);font-size:11px;padding:5px 12px;background:var(--bg3);color:var(--tx2);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.2s;}
+.preset:hover{color:var(--solar);border-color:var(--solar);background:rgba(255,179,0,0.05);}
+
+.legend{margin-top:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-size:11px;color:var(--tx2);font-family:var(--mono);line-height:1.7;}
+.legend b{color:var(--tx);}
+
+@media(max-width:720px){.layout{flex-direction:column;}.viz{order:1;}.ctrl{order:2;}}
+</style>
+</head>
+<body>
+
+<canvas class="stars" id="stars"></canvas>
+
+<div class="app">
+  <div class="hdr">
+    <h1><em>Project Sunroof</em> <span>2.0</span></h1>
+    <p>Atmospheric Correction Visualizer &mdash; Pb &times; Mc(D, &phi;)</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('location')">Location</button>
+    <button class="tab" onclick="switchTab('pb')">Pb Control</button>
+    <button class="tab" onclick="switchTab('mc')">Mc Control</button>
+    <button class="tab" onclick="switchTab('presets')">Presets</button>
+  </div>
+
+  <div class="layout">
+    <div class="viz">
+      <canvas id="earth" width="960" height="960"></canvas>
+      <div class="formula-bar">
+        W<sub>eff</sub> = W<sub>base</sub> &times; <b>P<sub>b</sub></b> &times; <b>M<sub>c</sub></b> = <span id="wbase-v">5.50</span> &times; <span id="pb-formula" class="val">1.13</span> &times; <span id="mc-formula" class="val">0.961</span> = <b id="weff-v">5.97</b> hrs
+      </div>
+      <div class="output-grid">
+        <div class="ocard"><div class="label">Pb &times; Mc</div><div class="num" id="o-pbmc" style="color:var(--solar)">1.085</div></div>
+        <div class="ocard"><div class="label">Irradiance &Delta;</div><div class="num" id="o-delta" style="color:var(--green)">+8.5%</div></div>
+        <div class="ocard"><div class="label">Zone Kt</div><div class="num" id="o-kt" style="color:var(--blue)">0.892</div></div>
+      </div>
+    </div>
+
+    <div class="ctrl">
+      <div class="panel" id="pan-location">
+        <h3><span class="dot" style="background:var(--blue)"></span> Location parameters</h3>
+        <div class="field">
+          <label>Latitude <span id="lat-v">30.0&deg;</span></label>
+          <input type="range" class="lat-range" id="lat" min="-70" max="70" value="30" step="0.5">
+        </div>
+        <div class="field">
+          <label>Coast distance (D) <span id="coast-v">50 km</span></label>
+          <input type="range" class="coast-range" id="coast" min="0" max="500" value="50" step="1">
+        </div>
+        <div class="field">
+          <label>W<sub>base</sub> (regional avg sunny hours) <span id="wbase-ctrl-v">5.50 hrs</span></label>
+          <input type="range" class="pb-range" id="wbase" min="1.5" max="7.5" value="5.5" step="0.1">
+        </div>
+        <div style="margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--tx2);">
+          Detected zone: <span class="zone-badge" id="zone-badge" style="color:var(--solar);border-color:var(--solar);">Subtropical HP</span>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="pan-pb">
+        <h3><span class="dot" style="background:var(--solar)"></span> Pressure Belt Multiplier (Pb)</h3>
+        <div class="field">
+          <label>Pb value <span id="pb-v">1.13</span></label>
+          <input type="range" class="pb-range" id="pb" min="0.80" max="1.20" value="1.13" step="0.01">
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--tx3);line-height:1.6;margin-top:8px;">
+          &bull; Subtropical HP (25-35&deg;): 1.10&ndash;1.15<br>
+          &bull; Tropical (0-25&deg;): 1.00&ndash;1.10<br>
+          &bull; Mid-latitude (35-60&deg;): 0.95&ndash;1.00<br>
+          &bull; Polar (60&deg;+): 0.85&ndash;0.95
+        </div>
+      </div>
+
+      <div class="panel hidden" id="pan-mc">
+        <h3><span class="dot" style="background:var(--green)"></span> Marine Correction Mc(D, &phi;)</h3>
+        <div class="field">
+          <label>&alpha;(&phi;) — coastal coefficient <span id="alpha-v">-0.040</span></label>
+          <input type="range" class="mc-range" id="alpha" min="-0.10" max="0.10" value="-0.040" step="0.001">
+        </div>
+        <div class="field">
+          <label>&lambda;(&phi;) — decay distance (km) <span id="lambda-v">79</span></label>
+          <input type="range" class="mc-range" id="lambda" min="1" max="120" value="79" step="1">
+        </div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--tx2);margin-top:6px;padding:10px;background:var(--bg3);border-radius:8px;">
+          Mc = 1 + <span id="mc-alpha-show">-0.040</span> &times; e<sup>&minus;<span id="mc-d-show">50</span>/<span id="mc-lambda-show">79</span></sup> = <b id="mc-result-show" style="color:var(--green)">0.961</b>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="pan-presets">
+        <h3><span class="dot" style="background:var(--purple)"></span> Location presets</h3>
+        <div class="presets" id="presets-container"></div>
+      </div>
+
+      <div class="legend">
+        <b>How to read the visualization:</b><br>
+        &bull; The <span style="color:var(--solar)">golden rays</span> show solar irradiance intensity &mdash; thicker/brighter = more energy reaching the roof<br>
+        &bull; The <span style="color:rgba(200,200,255,0.5)">atmospheric haze</span> represents cloud cover &mdash; denser = more energy blocked<br>
+        &bull; The <span style="color:var(--red)">red marker</span> pins your selected location on the rotating Earth<br>
+        &bull; Pb&times;Mc > 1.0 = above-average irradiance &bull; Pb&times;Mc < 1.0 = below-average
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const presets = [
+  {name:"Phoenix, AZ",lat:33.4,coast:400,pb:1.13,alpha:-0.040,lambda:79,wbase:6.5},
+  {name:"Riyadh, SA",lat:24.7,coast:500,pb:1.12,alpha:-0.040,lambda:79,wbase:6.5},
+  {name:"San Diego, CA",lat:32.7,coast:3,pb:1.12,alpha:-0.040,lambda:79,wbase:5.8},
+  {name:"Muscat, Oman",lat:23.6,coast:2,pb:1.13,alpha:-0.040,lambda:79,wbase:6.2},
+  {name:"Chennai, India",lat:13.1,coast:1,pb:1.02,alpha:0.025,lambda:15,wbase:5.5},
+  {name:"Mumbai, India",lat:19.1,coast:2,pb:1.04,alpha:0.025,lambda:15,wbase:5.3},
+  {name:"Singapore",lat:1.3,coast:2,pb:1.00,alpha:0.015,lambda:10,wbase:4.6},
+  {name:"Barcelona",lat:41.4,coast:0.5,pb:0.98,alpha:0.055,lambda:3,wbase:4.8},
+  {name:"Tokyo, Japan",lat:35.7,coast:5,pb:0.98,alpha:0.055,lambda:3,wbase:4.2},
+  {name:"Berlin, DE",lat:52.5,coast:300,pb:0.96,alpha:0.055,lambda:3,wbase:3.0},
+  {name:"London, UK",lat:51.5,coast:60,pb:0.95,alpha:0.055,lambda:3,wbase:3.0},
+  {name:"Helsinki, FI",lat:60.2,coast:2,pb:0.90,alpha:0.010,lambda:5,wbase:2.6},
+  {name:"Alice Springs",lat:-23.7,coast:1500,pb:1.14,alpha:-0.040,lambda:79,wbase:6.5},
+  {name:"Perth, AU",lat:-31.9,coast:5,pb:1.11,alpha:-0.040,lambda:79,wbase:5.8},
+  {name:"Denver, CO",lat:39.7,coast:1600,pb:0.98,alpha:0.055,lambda:3,wbase:5.0},
+  {name:"Jaipur, India",lat:26.9,coast:600,pb:1.11,alpha:0.025,lambda:15,wbase:5.7},
+];
+
+const pc = document.getElementById('presets-container');
+presets.forEach(p => {
+  const b = document.createElement('button');
+  b.className = 'preset';
+  b.textContent = p.name;
+  b.onclick = () => applyPreset(p);
+  pc.appendChild(b);
+});
+
+function applyPreset(p) {
+  document.getElementById('lat').value = p.lat;
+  document.getElementById('coast').value = Math.min(p.coast, 500);
+  document.getElementById('pb').value = p.pb;
+  document.getElementById('alpha').value = p.alpha;
+  document.getElementById('lambda').value = p.lambda;
+  document.getElementById('wbase').value = p.wbase;
+  targetLat = p.lat;
+  targetLon = getLonForPreset(p.name);
+  update();
+}
+
+function getLonForPreset(name) {
+  const lons = {"Phoenix, AZ":-112,"Riyadh, SA":46.7,"San Diego, CA":-117.2,"Muscat, Oman":58.5,
+    "Chennai, India":80.3,"Mumbai, India":72.9,"Singapore":103.8,"Barcelona":2.2,"Tokyo, Japan":139.7,
+    "Berlin, DE":13.4,"London, UK":-0.1,"Helsinki, FI":24.9,"Alice Springs":133.9,"Perth, AU":115.9,
+    "Denver, CO":-105,"Jaipur, India":75.8};
+  return lons[name] || 0;
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['location','pb','mc','presets'][i]===id));
+  ['pan-location','pan-pb','pan-mc','pan-presets'].forEach(p => document.getElementById(p).classList.add('hidden'));
+  document.getElementById('pan-'+id).classList.remove('hidden');
+}
+
+function getZone(lat) {
+  const a = Math.abs(lat);
+  if (a < 15) return {name:"Equatorial",color:"#E74C3C",pb:[1.00,1.00]};
+  if (a < 25) return {name:"Tropical",color:"#F39C12",pb:[1.00,1.10]};
+  if (a < 35) return {name:"Subtropical HP",color:"#FFB300",pb:[1.10,1.15]};
+  if (a < 60) return {name:"Mid-latitude",color:"#3498DB",pb:[0.95,1.00]};
+  return {name:"Polar",color:"#8E44AD",pb:[0.85,0.95]};
+}
+
+function computeMc(D, alpha, lambda) {
+  if (D > 300) return 1.0;
+  return 1.0 + alpha * Math.exp(-D / Math.max(lambda, 0.5));
+}
+
+let targetLat = 30, targetLon = 0;
+
+function update() {
+  const lat = parseFloat(document.getElementById('lat').value);
+  const coast = parseFloat(document.getElementById('coast').value);
+  const pb = parseFloat(document.getElementById('pb').value);
+  const alpha = parseFloat(document.getElementById('alpha').value);
+  const lambda = parseFloat(document.getElementById('lambda').value);
+  const wbase = parseFloat(document.getElementById('wbase').value);
+
+  targetLat = lat;
+  const mc = computeMc(coast, alpha, lambda);
+  const pbmc = pb * mc;
+  const weff = wbase * pbmc;
+  const delta = (pbmc - 1) * 100;
+  const zone = getZone(lat);
+
+  document.getElementById('lat-v').textContent = lat.toFixed(1) + '\u00B0';
+  document.getElementById('coast-v').textContent = coast + ' km';
+  document.getElementById('pb-v').textContent = pb.toFixed(2);
+  document.getElementById('alpha-v').textContent = alpha.toFixed(3);
+  document.getElementById('lambda-v').textContent = lambda;
+  document.getElementById('wbase-ctrl-v').textContent = wbase.toFixed(1) + ' hrs';
+
+  document.getElementById('pb-formula').textContent = pb.toFixed(2);
+  document.getElementById('mc-formula').textContent = mc.toFixed(3);
+  document.getElementById('wbase-v').textContent = wbase.toFixed(1);
+  document.getElementById('weff-v').textContent = weff.toFixed(2);
+
+  document.getElementById('mc-alpha-show').textContent = alpha.toFixed(3);
+  document.getElementById('mc-d-show').textContent = coast;
+  document.getElementById('mc-lambda-show').textContent = lambda;
+  document.getElementById('mc-result-show').textContent = mc.toFixed(4);
+
+  document.getElementById('o-pbmc').textContent = pbmc.toFixed(3);
+  const dEl = document.getElementById('o-delta');
+  dEl.textContent = (delta >= 0 ? '+' : '') + delta.toFixed(1) + '%';
+  dEl.style.color = delta >= 0 ? 'var(--green)' : 'var(--red)';
+
+  const kt_map = {"Equatorial":0.74,"Tropical":0.82,"Subtropical HP":0.89,"Mid-latitude":0.73,"Polar":0.69};
+  document.getElementById('o-kt').textContent = (kt_map[zone.name] || 0.80).toFixed(2);
+
+  const zb = document.getElementById('zone-badge');
+  zb.textContent = zone.name;
+  zb.style.color = zone.color;
+  zb.style.borderColor = zone.color;
+}
+
+document.querySelectorAll('input[type=range]').forEach(el => {
+  el.addEventListener('input', update);
+});
+update();
+
+// === STARFIELD ===
+const starsCvs = document.getElementById('stars');
+const starsCtx = starsCvs.getContext('2d');
+let starList = [];
+function initStars() {
+  starsCvs.width = window.innerWidth;
+  starsCvs.height = window.innerHeight;
+  starList = [];
+  for (let i = 0; i < 300; i++) {
+    starList.push({
+      x: Math.random() * starsCvs.width,
+      y: Math.random() * starsCvs.height,
+      r: Math.random() * 1.5 + 0.3,
+      a: Math.random(),
+      speed: Math.random() * 0.005 + 0.001
+    });
+  }
+}
+function drawStars(t) {
+  starsCtx.clearRect(0, 0, starsCvs.width, starsCvs.height);
+  starList.forEach(s => {
+    const flicker = 0.5 + 0.5 * Math.sin(t * s.speed * 10 + s.a * 100);
+    starsCtx.beginPath();
+    starsCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    starsCtx.fillStyle = `rgba(200,210,240,${s.a * flicker * 0.7})`;
+    starsCtx.fill();
+  });
+}
+initStars();
+window.addEventListener('resize', initStars);
+
+// === 3D EARTH ===
+const cvs = document.getElementById('earth');
+const ctx = cvs.getContext('2d');
+const W = 960, H = 960, R = 380, CX = W/2, CY = H/2;
+
+let rotY = 0, rotSpeed = 0.003, dragStart = null, dragRotStart = 0;
+
+cvs.addEventListener('mousedown', e => { dragStart = e.clientX; dragRotStart = rotY; rotSpeed = 0; });
+cvs.addEventListener('mousemove', e => { if (dragStart !== null) { rotY = dragRotStart + (e.clientX - dragStart) * 0.005; }});
+cvs.addEventListener('mouseup', () => { dragStart = null; rotSpeed = 0.003; });
+cvs.addEventListener('mouseleave', () => { dragStart = null; rotSpeed = 0.003; });
+cvs.addEventListener('touchstart', e => { dragStart = e.touches[0].clientX; dragRotStart = rotY; rotSpeed = 0; });
+cvs.addEventListener('touchmove', e => { if (dragStart !== null) { rotY = dragRotStart + (e.touches[0].clientX - dragStart) * 0.005; }});
+cvs.addEventListener('touchend', () => { dragStart = null; rotSpeed = 0.003; });
+
+const landMasses = [
+  {name:"NAmerica",pts:[[-130,55],[-125,50],[-120,35],[-105,30],[-100,25],[-82,25],[-75,30],[-65,45],[-55,50],[-65,60],[-90,65],[-120,65],[-140,62]]},
+  {name:"SAmerica",pts:[[-80,10],[-75,5],[-80,-5],[-70,-15],[-60,-25],[-55,-35],[-68,-55],[-75,-45],[-80,-20],[-82,-5],[-78,5]]},
+  {name:"Europe",pts:[[-10,36],[0,43],[5,46],[15,45],[30,45],[40,42],[30,55],[25,60],[15,65],[5,62],[-5,58],[-10,44]]},
+  {name:"Africa",pts:[[-15,30],[-5,35],[10,37],[35,30],[42,12],[50,2],[40,-12],[35,-25],[28,-34],[18,-35],[12,-25],[5,-5],[-5,5],[-17,15]]},
+  {name:"Asia",pts:[[30,42],[45,42],[55,40],[65,35],[70,25],[80,22],[88,22],[95,18],[105,15],[110,22],[120,30],[125,40],[130,45],[135,50],[140,55],[140,62],[130,65],[100,65],[80,60],[60,55],[40,48]]},
+  {name:"Australia",pts:[[115,-12],[130,-12],[140,-15],[150,-22],[152,-28],[148,-35],[140,-38],[130,-33],[115,-22]]},
+  {name:"India",pts:[[68,28],[72,22],[75,15],[77,8],[80,12],[85,18],[88,22],[87,26],[82,26],[77,30],[72,30]]},
+];
+
+function projectGlobe(lonDeg, latDeg, rY) {
+  const lon = (lonDeg * Math.PI) / 180;
+  const lat = (latDeg * Math.PI) / 180;
+  const x3 = R * Math.cos(lat) * Math.sin(lon + rY);
+  const y3 = -R * Math.sin(lat);
+  const z3 = R * Math.cos(lat) * Math.cos(lon + rY);
+  return { x: CX + x3, y: CY + y3, z: z3, visible: z3 > 0 };
+}
+
+function drawGlobe(t) {
+  ctx.clearRect(0, 0, W, H);
+
+  const pb = parseFloat(document.getElementById('pb').value);
+  const alpha = parseFloat(document.getElementById('alpha').value);
+  const lambda = parseFloat(document.getElementById('lambda').value);
+  const coast = parseFloat(document.getElementById('coast').value);
+  const mc = computeMc(coast, alpha, lambda);
+  const pbmc = pb * mc;
+  const intensity = Math.max(0.15, Math.min(1.0, pbmc / 1.15));
+
+  const grad = ctx.createRadialGradient(CX - 80, CY - 80, 0, CX, CY, R + 60);
+  grad.addColorStop(0, `rgba(255,${Math.round(180*intensity)},0,${0.04 * intensity})`);
+  grad.addColorStop(0.5, 'rgba(255,180,0,0.01)');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  const oceanGrad = ctx.createRadialGradient(CX - 60, CY - 60, R * 0.1, CX, CY, R);
+  oceanGrad.addColorStop(0, '#1A4A7A');
+  oceanGrad.addColorStop(0.5, '#0F3460');
+  oceanGrad.addColorStop(1, '#0A1628');
+  ctx.beginPath();
+  ctx.arc(CX, CY, R, 0, Math.PI * 2);
+  ctx.fillStyle = oceanGrad;
+  ctx.fill();
+
+  for (let latLine = -80; latLine <= 80; latLine += 20) {
+    ctx.beginPath();
+    let started = false;
+    for (let lon = -180; lon <= 180; lon += 3) {
+      const p = projectGlobe(lon, latLine, rotY);
+      if (p.visible) { if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); }
+      else started = false;
+    }
+    ctx.strokeStyle = 'rgba(80,130,200,0.08)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+  for (let lonLine = -180; lonLine < 180; lonLine += 30) {
+    ctx.beginPath();
+    let started = false;
+    for (let lat = -90; lat <= 90; lat += 3) {
+      const p = projectGlobe(lonLine, lat, rotY);
+      if (p.visible) { if (!started) { ctx.moveTo(p.x, p.y); started = true; } else ctx.lineTo(p.x, p.y); }
+      else started = false;
+    }
+    ctx.strokeStyle = 'rgba(80,130,200,0.06)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  landMasses.forEach(land => {
+    ctx.beginPath();
+    let started = false, anyVisible = false;
+    land.pts.forEach(([lon, lat]) => {
+      const p = projectGlobe(lon, lat, rotY);
+      if (p.visible) {
+        anyVisible = true;
+        if (!started) { ctx.moveTo(p.x, p.y); started = true; }
+        else ctx.lineTo(p.x, p.y);
+      } else started = false;
+    });
+    if (anyVisible) {
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(34,120,60,0.5)';
+      ctx.strokeStyle = 'rgba(46,204,113,0.3)';
+      ctx.lineWidth = 1;
+      ctx.fill();
+      ctx.stroke();
+    }
+  });
+
+  // Pressure belt bands
+  const belts = [
+    {lat1:25,lat2:35,color:`rgba(255,179,0,${0.06 * intensity})`,label:"HP"},
+    {lat1:-35,lat2:-25,color:`rgba(255,179,0,${0.06 * intensity})`,label:"HP"},
+    {lat1:-5,lat2:5,color:'rgba(231,76,60,0.04)',label:"ITCZ"},
+  ];
+  belts.forEach(belt => {
+    ctx.beginPath();
+    for (let lon = -180; lon <= 180; lon += 2) {
+      const p = projectGlobe(lon, belt.lat1, rotY);
+      if (p.visible) ctx.lineTo(p.x, p.y);
+    }
+    for (let lon = 180; lon >= -180; lon -= 2) {
+      const p = projectGlobe(lon, belt.lat2, rotY);
+      if (p.visible) ctx.lineTo(p.x, p.y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = belt.color;
+    ctx.fill();
+  });
+
+  // Location marker
+  const mp = projectGlobe(targetLon, targetLat, rotY);
+  if (mp.visible) {
+    const pulse = 6 + 3 * Math.sin(t * 3);
+    ctx.beginPath();
+    ctx.arc(mp.x, mp.y, pulse + 8, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(231,76,60,${0.1 + 0.05 * Math.sin(t * 3)})`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(mp.x, mp.y, pulse, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(231,76,60,0.25)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(mp.x, mp.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#E74C3C';
+    ctx.fill();
+    ctx.strokeStyle = '#FFF';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  // Atmosphere glow
+  const atmosGrad = ctx.createRadialGradient(CX, CY, R - 5, CX, CY, R + 40);
+  atmosGrad.addColorStop(0, 'rgba(100,160,255,0.03)');
+  atmosGrad.addColorStop(0.5, `rgba(100,160,255,${0.06 * (2 - intensity)})`);
+  atmosGrad.addColorStop(1, 'transparent');
+  ctx.beginPath();
+  ctx.arc(CX, CY, R + 40, 0, Math.PI * 2);
+  ctx.fillStyle = atmosGrad;
+  ctx.fill();
+
+  // Cloud haze (inversely proportional to pbmc)
+  const cloudOpacity = Math.max(0, 0.25 * (1.15 - pbmc));
+  for (let i = 0; i < 8; i++) {
+    const angle = (t * 0.2 + i * 0.8) % (Math.PI * 2);
+    const cr = R * 0.6 + i * 20;
+    const cx2 = CX + Math.cos(angle) * cr * 0.3;
+    const cy2 = CY + Math.sin(angle) * cr * 0.2;
+    const cGrad = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, 60 + i * 10);
+    cGrad.addColorStop(0, `rgba(180,200,230,${cloudOpacity * 0.4})`);
+    cGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = cGrad;
+    ctx.fillRect(cx2 - 80, cy2 - 80, 160, 160);
+  }
+
+  // Solar rays
+  const rayCount = Math.round(12 + 18 * intensity);
+  const rayLen = 60 + 140 * intensity;
+  for (let i = 0; i < rayCount; i++) {
+    const a = (i / rayCount) * Math.PI * 0.8 - Math.PI * 0.4 + Math.sin(t + i) * 0.05;
+    const ox = CX - R - 60;
+    const oy = CY - R * 0.5 + i * (R / rayCount) * 1.5;
+    const flicker = 0.6 + 0.4 * Math.sin(t * 2 + i * 1.5);
+    const rw = (1.5 + 3 * intensity) * flicker;
+
+    ctx.beginPath();
+    ctx.moveTo(ox - rayLen, oy - rayLen * Math.sin(a));
+    ctx.lineTo(ox, oy);
+    ctx.strokeStyle = `rgba(255,${Math.round(170 + 60 * intensity)},0,${0.08 * intensity * flicker})`;
+    ctx.lineWidth = rw;
+    ctx.stroke();
+  }
+
+  // Sun
+  const sunX = CX - R - 100, sunY = CY - 60;
+  const sunGlow = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, 120);
+  sunGlow.addColorStop(0, `rgba(255,200,50,${0.3 * intensity})`);
+  sunGlow.addColorStop(0.3, `rgba(255,180,0,${0.1 * intensity})`);
+  sunGlow.addColorStop(1, 'transparent');
+  ctx.fillStyle = sunGlow;
+  ctx.fillRect(sunX - 130, sunY - 130, 260, 260);
+  ctx.beginPath();
+  ctx.arc(sunX, sunY, 18, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255,220,100,${0.6 + 0.4 * intensity})`;
+  ctx.fill();
+
+  // Solar impact zone on earth surface
+  if (mp.visible && pbmc > 0.5) {
+    const impactGrad = ctx.createRadialGradient(mp.x, mp.y, 0, mp.x, mp.y, 50 + 60 * intensity);
+    impactGrad.addColorStop(0, `rgba(255,200,50,${0.15 * intensity})`);
+    impactGrad.addColorStop(0.5, `rgba(255,180,0,${0.06 * intensity})`);
+    impactGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = impactGrad;
+    ctx.beginPath();
+    ctx.arc(mp.x, mp.y, 50 + 60 * intensity, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function animate(t) {
+  const sec = t / 1000;
+  if (dragStart === null) rotY += rotSpeed;
+  drawStars(sec);
+  drawGlobe(sec);
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
