@@ -64,7 +64,7 @@ Six data-driven features that bridge the emotional gap between physical books an
 
 **Google** · PM × Applied Physics × ML
 
-> *"The sun equation has a weak link. I fixed it with atmospheric physics."*
+> *"The Answer for increased efficiency of solar rooftop lies in , what happens with Sunrays before hitting the panel: Geo-Physics had the answer all along"*
 
 Corrects the fundamental Climatological Coefficient (Wc) in the solar energy equation by introducing two novel multipliers: the **Pressure Belt Multiplier (Pb)** based on global circulation cells and the **Marine Coastal Distance Correction (Mc)** using exponential decay modeling.
 
