@@ -6,7 +6,7 @@
 
 [![GitHub](https://img.shields.io/badge/GitHub-Abhinav3419-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-DA3832?style=for-the-badge&logo=creativecommons&logoColor=white)](#)
-[![Case Studies](https://img.shields.io/badge/Case_Studies-04-6C3FC5?style=for-the-badge&logo=bookstack&logoColor=white)](#case-studies)
+[![Case Studies](https://img.shields.io/badge/Case_Studies-05-6C3FC5?style=for-the-badge&logo=bookstack&logoColor=white)](#case-studies)
 [![Status](https://img.shields.io/badge/Status-Active-00C853?style=for-the-badge&logo=statuspage&logoColor=white)](#)
 
 <br>
@@ -64,7 +64,7 @@ Six data-driven features that bridge the emotional gap between physical books an
 
 **Google** · PM × Applied Physics × ML
 
-> *"The Answer for increased efficiency of solar rooftop lies in , what happens with Sunrays before hitting the panel: Geo-Physics had the answer all along"*
+> *"The sun equation has a weak link. I fixed it with atmospheric physics."*
 
 Corrects the fundamental Climatological Coefficient (Wc) in the solar energy equation by introducing two novel multipliers: the **Pressure Belt Multiplier (Pb)** based on global circulation cells and the **Marine Coastal Distance Correction (Mc)** using exponential decay modeling.
 
@@ -119,6 +119,28 @@ A complete implementation blueprint for co-locating precision fermentation bio-f
 
 </td>
 </tr>
+<tr>
+<td width="60">
+
+**`05`**
+
+</td>
+<td>
+
+### [The Ethos Intelligence Suite: Empathy-First Features for Luxury EVs](./05-Luxury-EV-Ethos-Intelligence-Suite/)
+
+**BMW / Mercedes / Porsche / Audi** · PM × Automotive AI × Sensory UX × Predictive Analytics
+
+> *"The future of luxury is not more screens. It's more empathy."*
+
+Three novel modules for luxury EVs targeting the multi-generational household: **Acoustic Resurrection Engine** (generative V12 sound synthesis — not recordings), **Payload Oracle** (AI-powered weight-aware range prediction with actionable trade-off insights), and **Adaptive Guardian** (per-driver safety envelope that learns each family member's skill, blind spots, and driving patterns). Includes PRD framework, 3-phase GTM strategy with UBI insurance partnerships, and competitive analysis against Porsche Taycan, Tesla, and BMW current offerings.
+
+![Framework](https://img.shields.io/badge/Empathy--First_Strategy-C62828?style=flat-square)
+![Novel](https://img.shields.io/badge/3_Novel_Modules-None_Exist_Yet-6C3FC5?style=flat-square)
+![Domain](https://img.shields.io/badge/Automotive_AI-1565C0?style=flat-square)
+
+</td>
+</tr>
 </table>
 
 <br>
@@ -151,6 +173,11 @@ Case-Studies/
 │   ├── docs/presentation.pptx .. research-backed pitch deck
 │   └── assets/thermal-mapping.md
 │
+├── 05-Luxury-EV-Ethos-Intelligence-Suite/
+│   ├── README.md ............... 3 empathy-first EV modules
+│   ├── docs/case-study.docx .... full 7-page write-up with GTM + PRD
+│   └── assets/feature-reference.md
+│
 └── ... (next case study loading...)
 ```
 
@@ -167,6 +194,8 @@ Case-Studies/
 | `Exponential Decay Modeling` | Mathematical correction for physical phenomena | `#02` `#03` |
 | `Implementation Blueprint` | PM-actionable phased roadmap for industrial symbiosis | `#04` |
 | `Industrial Symbiosis` | Cross-industry resource optimization (heat, water, compute) | `#04` |
+| `Empathy-First Strategy` | Human-centered automotive feature design (Sound, Utility, Safety) | `#05` |
+| `PRD + GTM Framework` | Product requirements + go-to-market for OEM feature suite | `#05` |
 
 <br>
 
@@ -175,7 +204,7 @@ Case-Studies/
 
 ---
 
-**Built with curiosity. Delivered with conviction.**
+**Built with curiosity. Shipped with conviction.**
 
 [![GitHub](https://img.shields.io/badge/Follow-@Abhinav3419-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 
