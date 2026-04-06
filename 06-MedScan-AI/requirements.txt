@@ -1,0 +1,21 @@
+# MedScan AI — Dependencies
+# Core PDF Processing
+pdfplumber>=0.10.0
+pypdf>=4.0.0
+reportlab>=4.0.0
+
+# ML / NLP / RAG (Day 2+)
+# sentence-transformers>=2.2.0
+# chromadb>=0.4.0
+# langchain>=0.2.0
+# langchain-community>=0.2.0
+
+# LLM APIs (Day 3+)
+# anthropic>=0.25.0
+# openai>=1.0.0
+
+# UI (Day 4+)
+# streamlit>=1.30.0
+
+# Utilities
+python-dateutil>=2.8.0

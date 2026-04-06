@@ -1,0 +1,25 @@
+{
+    "project_name": "MedScan AI",
+    "version": "0.1.0",
+    "description": "Intelligent Clinical Report Analyzer using LLMs, RAG, and MCP",
+    "author": "Abhinav Pandey",
+    
+    "extraction": {
+        "supported_formats": ["pdf"],
+        "extraction_methods": ["table", "text_regex", "llm_fallback"],
+        "min_confidence_threshold": 0.7
+    },
+    
+    "reference_database": {
+        "source": "Harrison's Principles of Internal Medicine (21st Ed.), WHO, ICMR, Tietz",
+        "total_biomarkers": 56,
+        "total_aliases": 209,
+        "categories": [
+            "CBC", "CBC - Differential", "Lipid Profile", "Liver Function",
+            "Thyroid", "Kidney Function", "Electrolytes", "Blood Glucose",
+            "Vitamins", "Iron Studies"
+        ]
+    },
+    
+    "disclaimer": "This tool is for educational and informational purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider."
+}
