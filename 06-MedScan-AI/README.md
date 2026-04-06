@@ -81,34 +81,34 @@ All reference ranges are gender-specific where applicable, with critical thresho
 │                        MedScan AI Pipeline                      │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌──────────┐    ┌──────────────┐    ┌────────────────────┐    │
-│  │ PDF Input │───►│ pdfplumber   │───►│ Table Extraction   │    │
-│  │ (Any Lab) │    │ Text + Table │    │ + Regex Fallback   │    │
-│  └──────────┘    └──────────────┘    └────────┬───────────┘    │
+│  ┌──────────┐    ┌──────────────┐    ┌────────────────────┐     │
+│  │ PDF Input│───►│ pdfplumber   │───►│ Table Extraction   │     │
+│  │ (Any Lab)│    │ Text + Table │    │ + Regex Fallback   │     │
+│  └──────────┘    └──────────────┘    └────────┬───────────┘     │
 │                                               │                 │
 │                                               ▼                 │
-│  ┌──────────────────┐    ┌────────────────────────────────┐    │
-│  │ Patient Info      │    │ Biomarker Matching Engine      │    │
-│  │ Parser (Regex)    │    │ 56 canonical + 209 aliases     │    │
-│  └──────────────────┘    │ Exact → Partial → Word-level   │    │
-│                           └────────────────┬───────────────┘    │
-│                                            │                    │
-│                                            ▼                    │
-│  ┌──────────────────────────────────────────────────────┐      │
-│  │ Clinical Validation Engine                            │      │
-│  │ • Gender-specific reference ranges                    │      │
-│  │ • Flag: NORMAL / HIGH / LOW / CRITICAL               │      │
-│  │ • Deviation % calculation                             │      │
-│  │ • Interpretation bands (prediabetes, deficient, etc.) │      │
-│  └──────────────────────────┬───────────────────────────┘      │
-│                              │                                  │
-│                              ▼                                  │
-│  ┌────────────┐    ┌──────────────┐    ┌──────────────────┐   │
-│  │ JSON Output │    │ Summary View │    │ (Day 2+)         │   │
-│  │ Structured  │    │ Color-coded  │    │ RAG Analysis     │   │
-│  └────────────┘    └──────────────┘    │ LLM Reasoning    │   │
-│                                         │ Cited References  │   │
-│                                         └──────────────────┘   │
+│  ┌──────────────────┐    ┌────────────────────────────────┐     │
+│  │ Patient Info     │    │ Biomarker Matching Engine      │     │
+│  │ Parser (Regex)   │    │ 56 canonical + 209 aliases     │     │
+│  └──────────────────┘    │ Exact → Partial → Word-level   │     │
+│                          └────────────────┬───────────────┘     │
+│                                           │                     │
+│                                           ▼                     │
+│  ┌──────────────────────────────────────────────────────┐       │
+│  │ Clinical Validation Engine                           │       │
+│  │ • Gender-specific reference ranges                   │       │
+│  │ • Flag: NORMAL / HIGH / LOW / CRITICAL               │       │
+│  │ • Deviation % calculation                            │       │
+│  │ • Interpretation bands (prediabetes, deficient, etc.)│       │
+│  └──────────────────────────┬───────────────────────────┘       │
+│                             │                                   │
+│                             ▼                                   │
+│  ┌────────────┐    ┌──────────────┐    ┌──────────────────┐     │
+│  │ JSON Output│    │ Summary View │    │ (Day 2+)         │     │
+│  │ Structured │    │ Color-coded  │    │ RAG Analysis     │     │
+│  └────────────┘    └──────────────┘    │ LLM Reasoning    │     │
+│                                        │ Cited References │     │
+│                                        └──────────────────┘     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -134,7 +134,7 @@ medscan-ai/
 ├── config/
 │   └── settings.json              # Project configuration
 │
-├── docs/                          # (Day 5: methodology documentation)
+├── docs/                          # (Methodology documentation)
 ├── requirements.txt
 └── README.md
 ```
@@ -208,9 +208,9 @@ Multi-pattern regex extracts: name, age, sex, patient ID, sample ID, referring d
 | PDF Parsing | pdfplumber, pypdf |
 | Reference Database | Custom Python (56 biomarkers, Harrison's/WHO/ICMR/Tietz) |
 | Sample Generation | ReportLab |
-| RAG (Day 2) | LangChain, ChromaDB, sentence-transformers |
-| LLM (Day 3) | Claude API / OpenAI / Ollama (local) |
-| UI (Day 4) | Streamlit |
+| RAG  | LangChain, ChromaDB, sentence-transformers |
+| LLM  | Claude API / OpenAI / Ollama (local) |
+| UI  | Streamlit |
 | Testing | Custom test harness with assertion-based validation |
 
 ---
