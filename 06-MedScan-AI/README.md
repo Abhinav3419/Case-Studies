@@ -104,10 +104,9 @@ All reference ranges are gender-specific where applicable, with critical thresho
 │                             │                                   │
 │                             ▼                                   │
 │  ┌────────────┐    ┌──────────────┐    ┌──────────────────┐     │
-│  │ JSON Output│    │ Summary View │    │ (Day 2+)         │     │
-│  │ Structured │    │ Color-coded  │    │ RAG Analysis     │     │
-│  └────────────┘    └──────────────┘    │ LLM Reasoning    │     │
-│                                        │ Cited References │     │
+│  │ JSON Output│    │ Summary View │    │  RAG Analysis    │     │
+│  │ Structured │    │ Color-coded  │    │  LLM Reasoning   │     │
+│  └────────────┘    └──────────────┘    │ Cited References │     │
 │                                        └──────────────────┘     │
 └─────────────────────────────────────────────────────────────────┘
 ```
