@@ -74,10 +74,43 @@ All reference ranges are gender-specific where applicable, with critical thresho
 
 ---
 
-
 ## Architecture
 
-![MedScan AI Architecture](docs/architecture.png)
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        MedScan AI Pipeline                      │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌──────────┐    ┌──────────────┐    ┌────────────────────┐     │
+│  │ PDF Input│───►│ pdfplumber   │───►│ Table Extraction   │     │
+│  │ (Any Lab)│    │ Text + Table │    │ + Regex Fallback   │     │
+│  └──────────┘    └──────────────┘    └────────┬───────────┘     │
+│                                               │                 │
+│                                               ▼                 │
+│  ┌──────────────────┐    ┌────────────────────────────────┐     │
+│  │ Patient Info     │    │ Biomarker Matching Engine      │     │
+│  │ Parser (Regex)   │    │ 56 canonical + 209 aliases     │     │
+│  └──────────────────┘    │ Exact → Partial → Word-level   │     │
+│                          └────────────────┬───────────────┘     │
+│                                           │                     │
+│                                           ▼                     │
+│  ┌──────────────────────────────────────────────────────┐       │
+│  │ Clinical Validation Engine                           │       │
+│  │ • Gender-specific reference ranges                   │       │
+│  │ • Flag: NORMAL / HIGH / LOW / CRITICAL               │       │
+│  │ • Deviation % calculation                            │       │
+│  │ • Interpretation bands (prediabetes, deficient, etc.)│       │
+│  └──────────────────────────┬───────────────────────────┘       │
+│                             │                                   │
+│                             ▼                                   │
+│  ┌────────────┐    ┌──────────────┐    ┌──────────────────┐     │
+│  │ JSON Output│    │ Summary View │    │ (Day 2+)         │     │
+│  │ Structured │    │ Color-coded  │    │ RAG Analysis     │     │
+│  └────────────┘    └──────────────┘    │ LLM Reasoning    │     │
+│                                        │ Cited References │     │
+│                                        └──────────────────┘     │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -161,8 +194,8 @@ Multi-pattern regex extracts: name, age, sex, patient ID, sample ID, referring d
 | Day | Milestone | Status |
 |-----|-----------|--------|
 | **1** | PDF Parsing + Biomarker Extraction Engine | ✅ Complete |
-| **2** | Medical Knowledge Base + RAG Pipeline (ChromaDB + embeddings) | ✅ Next |
-| **3** | LLM Analysis Engine + Clinical Reasoning Chain | 🔲 Planned |
+| **2** | Medical Knowledge Base + RAG Pipeline (ChromaDB + embeddings) | ✅ Complete |
+| **3** | LLM Analysis Engine + Clinical Reasoning Chain | ✅ Complete |
 | **4** | MCP Integration + Streamlit UI | 🔲 Planned |
 | **5** | Validation, Edge Cases, Documentation + GitHub Polish | 🔲 Planned |
 
@@ -175,7 +208,7 @@ Multi-pattern regex extracts: name, age, sex, patient ID, sample ID, referring d
 | PDF Parsing | pdfplumber, pypdf |
 | Reference Database | Custom Python (56 biomarkers, Harrison's/WHO/ICMR/Tietz) |
 | Sample Generation | ReportLab |
-| RAG  | LangChain, ChromaDB, sentence-transformers |
+| RAG | LangChain, ChromaDB, sentence-transformers |
 | LLM  | Claude API / OpenAI / Ollama (local) |
 | UI  | Streamlit |
 | Testing | Custom test harness with assertion-based validation |
