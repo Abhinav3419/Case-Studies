@@ -380,6 +380,76 @@ class LocalAnalysisEngine:
                          "Gastrointestinal bleeding", "Catabolic state / fever"],
                 "LOW": ["Low protein diet", "Severe liver disease", "Overhydration"],
             },
+            "crp": {
+                "HIGH": ["Bacterial infection (most common)", "Autoimmune disease flare",
+                         "Tissue injury / trauma", "Malignancy"],
+            },
+            "procalcitonin": {
+                "HIGH": ["Bacterial sepsis (highly specific)", "Bacterial pneumonia",
+                         "Urinary tract infection", "Intra-abdominal sepsis"],
+            },
+            "cd4_count": {
+                "LOW": ["HIV/AIDS (most common)", "Immunosuppressive therapy",
+                         "Severe malnutrition", "Active tuberculosis"],
+            },
+            "d_dimer": {
+                "HIGH": ["DVT/pulmonary embolism", "DIC", "COVID-19 coagulopathy",
+                         "Post-surgical state", "Malignancy"],
+            },
+            "il6": {
+                "HIGH": ["Cytokine storm (COVID-19, sepsis)", "Severe bacterial infection",
+                         "Autoimmune disease flare", "Castleman disease"],
+            },
+            "ldh": {
+                "HIGH": ["Lymphoma (especially aggressive NHL)", "Haemolysis",
+                         "Myocardial infarction", "Pulmonary embolism", "Liver disease"],
+            },
+            "psa": {
+                "HIGH": ["Benign prostatic hyperplasia (most common)", "Prostate cancer",
+                         "Prostatitis", "Recent urinary catheterization"],
+            },
+            "ca125": {
+                "HIGH": ["Ovarian cancer", "Endometriosis", "Pelvic inflammatory disease",
+                         "Liver cirrhosis with ascites"],
+            },
+            "cea": {
+                "HIGH": ["Colorectal cancer recurrence", "Lung adenocarcinoma",
+                         "Pancreatic cancer", "Smoking (mild elevation)"],
+            },
+            "afp": {
+                "HIGH": ["Hepatocellular carcinoma", "Testicular germ cell tumour",
+                         "Chronic hepatitis / cirrhosis (mild)", "Pregnancy (physiological)"],
+            },
+            "ca199": {
+                "HIGH": ["Pancreatic adenocarcinoma", "Cholangiocarcinoma",
+                         "Cholestasis / biliary obstruction (benign)", "Chronic pancreatitis"],
+            },
+            "pt": {
+                "HIGH": ["Warfarin therapy", "Liver disease", "Vitamin K deficiency", "DIC"],
+            },
+            "inr": {
+                "HIGH": ["Warfarin effect", "Liver failure", "DIC", "Vitamin K deficiency"],
+            },
+            "aptt": {
+                "HIGH": ["Heparin therapy", "Haemophilia A or B", "von Willebrand disease",
+                         "Lupus anticoagulant", "DIC"],
+            },
+            "fibrinogen": {
+                "LOW": ["DIC (consumption)", "Severe liver disease",
+                         "Massive transfusion dilution", "Congenital hypofibrinogenemia"],
+                "HIGH": ["Acute infection (acute-phase reactant)", "Inflammation",
+                         "Malignancy", "Pregnancy"],
+            },
+            "g6pd": {
+                "LOW": ["G6PD deficiency (X-linked)", "Acute haemolytic episode (falsely normal — recheck later)"],
+            },
+            "hba2_percentage": {
+                "HIGH": ["Beta-thalassemia trait (3.5-8%)", "Megaloblastic anaemia (mild elevation)"],
+            },
+            "hbf_percentage": {
+                "HIGH": ["Beta-thalassemia major", "Sickle cell disease",
+                         "Hereditary persistence of fetal Hb (HPFH)", "Myelodysplastic syndrome"],
+            },
         }
 
         key = name.lower()
@@ -419,6 +489,32 @@ class LocalAnalysisEngine:
             "free_t3": ["Check TSH and Free T4 for thyroid status", "Rule out non-thyroidal illness if hospitalized", "Endocrinology referral if persistently low"],
             "free_t4": ["Check TSH — high TSH confirms primary hypothyroidism", "Anti-TPO antibodies for autoimmune cause", "Start levothyroxine if overt hypothyroidism confirmed"],
             "blood_urea": ["Check serum creatinine and eGFR for renal function", "Assess hydration status", "Review dietary protein intake"],
+            "crp": ["Correlate with procalcitonin to distinguish bacterial vs viral", "Serial CRP every 24-48 hrs to track treatment response", "Blood cultures if CRP >100 mg/L with fever"],
+            "procalcitonin": ["Blood cultures immediately if PCT >0.5", "Initiate broad-spectrum antibiotics if sepsis suspected", "PCT-guided antibiotic de-escalation (stop if PCT <0.25)"],
+            "cd4_count": ["HIV viral load testing", "Start/review ART (antiretroviral therapy)", "OI prophylaxis if CD4 <200 (TMP-SMX for PCP)"],
+            "hiv_viral_load": ["Adherence counselling if detectable on ART", "HIV resistance testing if virological failure", "Switch ART regimen per NACO guidelines"],
+            "hbsag": ["Hepatitis B DNA viral load", "Liver function tests + ultrasound", "AFP every 6 months for HCC screening"],
+            "anti_hcv": ["Confirmatory HCV RNA PCR", "Genotype testing if RNA positive", "Hepatology referral for direct-acting antiviral treatment"],
+            "dengue_ns1": ["Serial platelet count every 12-24 hrs", "Haematocrit monitoring for plasma leakage", "Avoid NSAIDs/aspirin — use paracetamol only"],
+            "d_dimer": ["CT pulmonary angiography if PE suspected", "Doppler ultrasound of legs if DVT suspected", "Check coagulation panel (PT, aPTT, fibrinogen) for DIC"],
+            "il6": ["Consider tocilizumab if IL-6 >100 with respiratory decline", "Monitor CRP and ferritin trend", "ICU assessment for cytokine storm management"],
+            "ldh": ["Peripheral smear for haemolysis markers", "CT scan if lymphoma suspected", "Correlate with haptoglobin and reticulocyte count"],
+            "psa": ["Free PSA / Total PSA ratio if PSA 4-10", "Urology referral for biopsy if PSA >10", "MRI prostate (mpMRI) before biopsy if available"],
+            "ca125": ["Pelvic ultrasound (transvaginal)", "Gynaecology referral", "CT abdomen-pelvis if malignancy suspected"],
+            "cea": ["Colonoscopy if colorectal cancer suspected or monitoring", "CT chest/abdomen if metastatic disease suspected", "Compare with post-surgical baseline CEA"],
+            "afp": ["Liver ultrasound + triphasic CT/MRI if HCC suspected", "Testicular ultrasound if male with elevated AFP", "Correlate with liver function tests"],
+            "ca199": ["CT pancreas (pancreatic protocol)", "MRCP if biliary obstruction", "GI/surgical oncology referral"],
+            "pt": ["Check INR and correlate with warfarin dose", "Vitamin K administration if elevated with bleeding", "Liver function panel"],
+            "inr": ["Adjust warfarin dose per protocol", "Hold warfarin and give Vitamin K if INR >5", "FFP or PCC if active bleeding with high INR"],
+            "aptt": ["Mixing study to differentiate factor deficiency vs inhibitor", "Factor VIII and IX levels if haemophilia suspected", "Check for lupus anticoagulant"],
+            "fibrinogen": ["Check D-dimer and platelets for DIC assessment", "Cryoprecipitate if fibrinogen <100 with bleeding", "Treat underlying cause (sepsis, obstetric emergency)"],
+            "g6pd": ["Avoid oxidant drugs (primaquine, dapsone, rasburicase)", "Supportive care during haemolytic episodes", "Genetic counselling for family planning"],
+            "hba2_percentage": ["Genetic counselling if beta-thalassemia trait confirmed", "Partner screening for thalassemia carrier status", "Iron studies to exclude concurrent iron deficiency"],
+            "hbf_percentage": ["Haemoglobin electrophoresis for full variant analysis", "Genetic counselling", "Haematology referral if thalassemia major suspected"],
+            "ada": ["Pleural fluid analysis (protein, glucose, cell count)", "Sputum GeneXpert MTB/RIF", "CT chest for TB evaluation"],
+            "quantiferon": ["Chest X-ray to rule out active TB", "Sputum testing if symptomatic", "LTBI treatment if positive without active disease"],
+            "widal_o": ["Blood culture (gold standard for typhoid)", "Repeat Widal in 1 week for rising titres", "Start empiric antibiotics if clinically suspicious"],
+            "beta_hcg": ["Pregnancy test (urine) if female of reproductive age", "Testicular ultrasound if male", "Serial beta-HCG to assess doubling time"],
         }
 
         key = name.lower()
@@ -460,6 +556,15 @@ class LocalAnalysisEngine:
         elif "nafld" in title_lower or "fatty liver" in title_lower:
             return ["Liver ultrasound", "FIB-4 score for fibrosis staging",
                     "Hepatitis B/C serology to exclude viral cause"]
+        elif "sepsis" in title_lower:
+            return ["Blood cultures (2 sets before antibiotics)", "Serum lactate level",
+                    "Procalcitonin-guided antibiotic stewardship", "SOFA score calculation"]
+        elif "dic" in title_lower or "coagulopathy" in title_lower:
+            return ["ISTH DIC score (platelets + D-dimer + fibrinogen + PT)",
+                    "Peripheral smear for schistocytes", "Identify and treat underlying trigger (sepsis, malignancy, obstetric)"]
+        elif "tumour" in title_lower or "malignancy" in title_lower:
+            return ["Tissue biopsy for histological confirmation",
+                    "CT/PET scan for staging", "Oncology referral"]
         return ["Further clinical evaluation", "Specialist referral as needed"]
 
     def generate_summary(self, enriched: EnrichedReport,
@@ -550,6 +655,22 @@ class LocalAnalysisEngine:
             "iron_serum": "Iron Studies", "ferritin": "Iron Studies",
             "tibc": "Iron Studies", "transferrin_saturation": "Iron Studies",
             "uric_acid": "Kidney",
+            "crp": "Infection/Inflammation", "procalcitonin": "Infection/Inflammation",
+            "il6": "Infection/Inflammation",
+            "cd4_count": "HIV/Immunology", "hiv_viral_load": "HIV/Immunology",
+            "hbsag": "Hepatitis", "anti_hcv": "Hepatitis",
+            "dengue_ns1": "Infectious Disease", "dengue_igm": "Infectious Disease",
+            "malaria_antigen": "Infectious Disease", "widal_o": "Infectious Disease",
+            "widal_h": "Infectious Disease", "ada": "Infectious Disease",
+            "quantiferon": "Infectious Disease",
+            "d_dimer": "Coagulation/COVID", "pt": "Coagulation", "inr": "Coagulation",
+            "aptt": "Coagulation", "fibrinogen": "Coagulation",
+            "psa": "Tumour Markers", "ca125": "Tumour Markers", "cea": "Tumour Markers",
+            "afp": "Tumour Markers", "ca199": "Tumour Markers", "beta_hcg": "Tumour Markers",
+            "ldh": "Tumour Markers", "spep": "Tumour Markers",
+            "hba_electrophoresis": "Genetic/Haematology", "hbs_percentage": "Genetic/Haematology",
+            "hba2_percentage": "Genetic/Haematology", "hbf_percentage": "Genetic/Haematology",
+            "g6pd": "Genetic/Haematology",
         }
         return cat_map.get(canonical_name, "Other")
 

@@ -104,8 +104,8 @@ All reference ranges are gender-specific where applicable, with critical thresho
 │                             │                                   │
 │                             ▼                                   │
 │  ┌────────────┐    ┌──────────────┐    ┌──────────────────┐     │
-│  │ JSON Output│    │ Summary View │    │  RAG Analysis    │     │
-│  │ Structured │    │ Color-coded  │    │  LLM Reasoning   │     │
+│  │ JSON Output│    │ Summary View │    │ RAG Analysis     │     │
+│  │ Structured │    │ Color-coded  │    │ LLM Reasoning    │     │
 │  └────────────┘    └──────────────┘    │ Cited References │     │
 │                                        └──────────────────┘     │
 └─────────────────────────────────────────────────────────────────┘
@@ -195,7 +195,7 @@ Multi-pattern regex extracts: name, age, sex, patient ID, sample ID, referring d
 | **1** | PDF Parsing + Biomarker Extraction Engine | ✅ Complete |
 | **2** | Medical Knowledge Base + RAG Pipeline (ChromaDB + embeddings) | ✅ Complete |
 | **3** | LLM Analysis Engine + Clinical Reasoning Chain | ✅ Complete |
-| **4** | MCP Integration + Streamlit UI | 🔲 Planned |
+| **4** | MCP Integration + Streamlit UI | ✅ Complete |
 | **5** | Validation, Edge Cases, Documentation + GitHub Polish | 🔲 Planned |
 
 ---
@@ -207,9 +207,9 @@ Multi-pattern regex extracts: name, age, sex, patient ID, sample ID, referring d
 | PDF Parsing | pdfplumber, pypdf |
 | Reference Database | Custom Python (56 biomarkers, Harrison's/WHO/ICMR/Tietz) |
 | Sample Generation | ReportLab |
-| RAG | LangChain, ChromaDB, sentence-transformers |
-| LLM  | Claude API / OpenAI / Ollama (local) |
-| UI  | Streamlit |
+| RAG (Day 2) | LangChain, ChromaDB, sentence-transformers |
+| LLM (Day 3) | Claude API / OpenAI / Ollama (local) |
+| UI (Day 4) | Streamlit |
 | Testing | Custom test harness with assertion-based validation |
 
 ---

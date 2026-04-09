@@ -481,6 +481,341 @@ MEDICAL_KNOWLEDGE = [
         "source": "Endocrine Society Guidelines; Thyroid Journal meta-analysis; Harrison's Ch. 375",
         "tags": ["hashimoto", "vitamin d", "autoimmune", "anti-tpo", "thyroid", "combined"]
     },
+
+    # ================================================================
+    # INFECTIOUS DISEASE MARKERS
+    # ================================================================
+    {
+        "id": "infect_001",
+        "category": "Infectious Disease",
+        "title": "CRP and Procalcitonin — Bacterial vs Viral Differentiation",
+        "content": (
+            "CRP (C-Reactive Protein) is a non-specific acute-phase reactant produced by the liver. "
+            "CRP >10 mg/L suggests significant inflammation; >100 mg/L strongly suggests bacterial infection or severe inflammatory condition. "
+            "Procalcitonin (PCT) is more specific for bacterial infection: PCT <0.05 ng/mL = normal, "
+            "0.05-0.5 = possible local bacterial infection, 0.5-2.0 = likely bacterial sepsis, "
+            "2.0-10.0 = severe sepsis, >10.0 = septic shock with high mortality risk. "
+            "Key clinical utility: PCT helps distinguish bacterial from viral infections — PCT remains low in viral infections "
+            "while CRP rises in both. PCT-guided antibiotic stewardship reduces antibiotic duration by 2-3 days without adverse outcomes. "
+            "In COVID-19: CRP >100 mg/L predicts severe disease; PCT >0.5 suggests bacterial superinfection. "
+            "Serial CRP monitoring (every 24-48 hrs) tracks treatment response — halving of CRP suggests effective therapy."
+        ),
+        "source": "Surviving Sepsis Campaign 2021; Harrison's Principles Ch. 297; Lancet ID meta-analysis on PCT",
+        "tags": ["crp", "procalcitonin", "bacterial", "viral", "sepsis", "infection", "covid"]
+    },
+    {
+        "id": "infect_002",
+        "category": "Infectious Disease",
+        "title": "HIV Monitoring — CD4 Count and Viral Load Interpretation",
+        "content": (
+            "CD4 count is the primary marker for immune status in HIV: "
+            "CD4 >500 cells/µL = adequate immune function (Stage 1). "
+            "CD4 350-499 = mild immunosuppression (Stage 2). "
+            "CD4 200-349 = advanced immunosuppression, OI prophylaxis needed (Stage 3). "
+            "CD4 <200 = AIDS-defining, severe risk of opportunistic infections (PCP, Toxoplasma, Cryptococcus). "
+            "WHO and NACO (India) now recommend immediate ART initiation regardless of CD4 count ('Test and Treat'). "
+            "Viral load (HIV RNA) is the primary marker for treatment efficacy: "
+            "Undetectable (<20 copies/mL) = treatment success and U=U (undetectable = untransmittable). "
+            "Viral load >200 copies/mL on two occasions = virological failure — check adherence, consider resistance testing. "
+            "India has the third-largest HIV population globally (~2.4 million per NACO 2023). "
+            "CD4 recovery: expect ~100 cells/µL increase per year on effective ART."
+        ),
+        "source": "WHO Consolidated HIV Guidelines 2024; NACO India ART Guidelines; Harrison's Ch. 197",
+        "tags": ["hiv", "cd4", "viral load", "aids", "art", "immunodeficiency"]
+    },
+    {
+        "id": "infect_003",
+        "category": "Infectious Disease",
+        "title": "Hepatitis B Panel — Serological Interpretation",
+        "content": (
+            "Hepatitis B serological patterns: "
+            "HBsAg positive + Anti-HBc IgM positive = acute HBV infection. "
+            "HBsAg positive + Anti-HBc IgG positive + HBeAg positive = chronic active HBV (high infectivity). "
+            "HBsAg positive + Anti-HBc IgG positive + Anti-HBe positive = chronic inactive carrier (low infectivity). "
+            "HBsAg negative + Anti-HBs positive + Anti-HBc positive = resolved past infection (immune). "
+            "HBsAg negative + Anti-HBs positive + Anti-HBc negative = vaccinated (immune). "
+            "All negative = susceptible, needs vaccination. "
+            "India is hyperendemic for HBV with ~40 million chronic carriers per INASL. "
+            "HBV DNA viral load determines treatment need: treat if >2000 IU/mL with elevated ALT or significant fibrosis. "
+            "First-line treatment: Tenofovir or Entecavir (long-term, possibly lifelong). "
+            "All HBsAg-positive patients need hepatocellular carcinoma screening (AFP + ultrasound every 6 months)."
+        ),
+        "source": "AASLD HBV Guidelines 2024; INASL Guidelines; Harrison's Ch. 332",
+        "tags": ["hepatitis b", "hbsag", "hbv", "liver", "vaccination", "infection"]
+    },
+    {
+        "id": "infect_004",
+        "category": "Infectious Disease",
+        "title": "Dengue Diagnostics — NS1, IgM, IgG Interpretation",
+        "content": (
+            "Dengue diagnostic timeline: "
+            "Day 1-5 of fever: NS1 antigen positive (sensitivity 90%+ in primary infection, lower in secondary). "
+            "Day 5+: NS1 declines, IgM becomes positive (persists 2-3 months). "
+            "IgG: rises in secondary infection (appears by day 2-3), in primary infection appears after 2 weeks. "
+            "High IgG/IgM ratio (>1.4) suggests secondary dengue — higher risk of Dengue Hemorrhagic Fever (DHF). "
+            "Warning signs for severe dengue: platelet count <100,000/µL, haematocrit rise >20%, "
+            "abdominal pain, persistent vomiting, mucosal bleeding, lethargy. "
+            "India reports 100,000+ dengue cases annually (vastly underreported). "
+            "No specific antiviral — management is supportive: IV fluids, platelet monitoring every 12-24 hrs, "
+            "avoid NSAIDs and aspirin (bleeding risk). Platelet transfusion only if <10,000 or active bleeding."
+        ),
+        "source": "WHO Dengue Guidelines 2009 (updated 2024); NVBDCP India Guidelines; Harrison's Ch. 204",
+        "tags": ["dengue", "ns1", "igm", "platelet", "hemorrhagic fever", "infection"]
+    },
+    {
+        "id": "infect_005",
+        "category": "Infectious Disease",
+        "title": "Tuberculosis Markers — ADA, Quantiferon, and Diagnosis",
+        "content": (
+            "TB diagnosis in India (highest burden globally — ~2.8 million cases/year per RNTCP): "
+            "Quantiferon-TB Gold (IGRA): positive ≥0.35 IU/mL indicates TB infection (latent or active). "
+            "Cannot distinguish latent from active TB — clinical correlation required. "
+            "ADA (Adenosine Deaminase): Pleural ADA >40 U/L = 92% sensitivity for tuberculous pleural effusion. "
+            "CSF ADA >10 U/L suggests TB meningitis. Peritoneal ADA >39 U/L suggests abdominal TB. "
+            "Sputum GeneXpert MTB/RIF: gold standard for pulmonary TB — detects MTB and rifampicin resistance in 2 hours. "
+            "AFB smear microscopy: low sensitivity (45-80%) but widely available. "
+            "TB blood markers: elevated ESR, lymphocytosis, anaemia of chronic disease, low albumin. "
+            "RNTCP (now NTEP) regimen: HRZE for 2 months intensive + HR for 4 months continuation. "
+            "Drug-resistant TB needs MDR-TB regimen with bedaquiline-based shorter regimen."
+        ),
+        "source": "NTEP India Guidelines 2024; WHO TB Guidelines; Harrison's Ch. 173",
+        "tags": ["tuberculosis", "tb", "ada", "quantiferon", "igra", "genexpert", "infection"]
+    },
+    {
+        "id": "infect_006",
+        "category": "Infectious Disease",
+        "title": "COVID-19 Severity Markers — D-dimer, Ferritin, IL-6, LDH",
+        "content": (
+            "COVID-19 laboratory predictors of severity: "
+            "D-dimer >1000 ng/mL: 18x higher mortality risk — indicates coagulopathy and microthrombi formation. "
+            "Ferritin >500 ng/mL: suggests hyperinflammation/cytokine storm (macrophage activation). "
+            "IL-6 >100 pg/mL: correlates with cytokine storm severity — tocilizumab indicated in this range. "
+            "LDH >400 U/L: indicates tissue damage and correlates with lung involvement severity. "
+            "CRP >100 mg/L: predicts ICU admission and mechanical ventilation need. "
+            "Lymphopenia (<1000/µL): hallmark of severe COVID-19 — correlates with T-cell exhaustion. "
+            "NLR (Neutrophil-Lymphocyte Ratio) >5: independent predictor of critical illness. "
+            "Procalcitonin >0.5 ng/mL in COVID-19: suggests bacterial co-infection — add antibiotics. "
+            "These markers guide triaging: mild (normal labs) → moderate (1-2 elevated) → severe (multiple elevated) → critical (all markedly elevated with organ dysfunction)."
+        ),
+        "source": "WHO COVID-19 Clinical Management Guide 2023; NIH COVID-19 Treatment Guidelines; Lancet meta-analysis",
+        "tags": ["covid", "d-dimer", "ferritin", "il-6", "ldh", "cytokine storm", "coagulopathy"]
+    },
+    {
+        "id": "infect_007",
+        "category": "Infectious Disease",
+        "title": "Malaria and Typhoid — Endemic Disease Markers in India",
+        "content": (
+            "Malaria diagnosis: Peripheral smear (gold standard) identifies species and parasitaemia %. "
+            "Rapid Diagnostic Test (RDT): detects P. falciparum HRP-2 and pan-Plasmodium pLDH antigens. "
+            "Parasitaemia >5% = severe malaria (per WHO) — requires IV artesunate. "
+            "Lab features of severe malaria: anaemia, thrombocytopenia, hypoglycaemia, elevated bilirubin, elevated creatinine. "
+            "Typhoid (Salmonella typhi): Blood culture is gold standard (positive in 60-80% week 1). "
+            "Widal test: O titre ≥1:160 and H titre ≥1:160 suggestive in endemic areas (India). "
+            "Single Widal is unreliable — rising titres (4-fold increase in paired samples 1 week apart) are more diagnostic. "
+            "Typhoid complications: intestinal perforation (week 3), GI bleeding, encephalopathy. "
+            "Treatment: Azithromycin or Ceftriaxone (resistance to fluoroquinolones increasing in India)."
+        ),
+        "source": "WHO Malaria Guidelines 2023; Indian NVBDCP; Harrison's Ch. 219, 164",
+        "tags": ["malaria", "typhoid", "widal", "parasitaemia", "endemic", "infection"]
+    },
+
+    # ================================================================
+    # TUMOUR MARKERS
+    # ================================================================
+    {
+        "id": "tumour_001",
+        "category": "Tumour Markers",
+        "title": "PSA — Prostate Cancer Screening and Monitoring",
+        "content": (
+            "PSA (Prostate-Specific Antigen) interpretation: "
+            "PSA <4.0 ng/mL: normal (but 15% of cancers occur with PSA <4). "
+            "PSA 4-10 ng/mL: grey zone — 25% chance of cancer; calculate free PSA ratio. "
+            "Free PSA/Total PSA <10%: high cancer suspicion. >25%: likely BPH (benign). "
+            "PSA >10 ng/mL: 50%+ probability of prostate cancer — biopsy strongly recommended. "
+            "PSA >20 ng/mL: high probability of cancer with possible extraprostatic extension. "
+            "PSA velocity >0.75 ng/mL/year: suspicious even if PSA is in normal range. "
+            "Non-cancer causes of elevated PSA: BPH (most common), prostatitis, recent ejaculation, "
+            "urinary retention, cycling, DRE examination. "
+            "PSA is organ-specific (prostate) but NOT cancer-specific. "
+            "USPSTF recommends shared decision-making for PSA screening in men 55-69 years. "
+            "In post-treatment monitoring: PSA should be undetectable after radical prostatectomy; "
+            "rising PSA indicates biochemical recurrence."
+        ),
+        "source": "NCCN Prostate Cancer Guidelines 2024; AUA/ASTRO Guidelines; Harrison's Ch. 83",
+        "tags": ["psa", "prostate", "cancer", "bph", "screening", "tumour marker"]
+    },
+    {
+        "id": "tumour_002",
+        "category": "Tumour Markers",
+        "title": "CA-125, CEA, AFP, CA 19-9 — Major Tumour Markers Panel",
+        "content": (
+            "CA-125: Primary marker for ovarian cancer. >35 U/mL is elevated. "
+            "Non-malignant causes: endometriosis, PID, cirrhosis, heart failure, pregnancy, menstruation. "
+            "Most useful for monitoring treatment response and recurrence in known ovarian cancer. "
+            "CEA (Carcinoembryonic Antigen): Elevated in colorectal, lung, breast, pancreatic cancers. "
+            "Normal <5 ng/mL (higher in smokers). Primary role: monitoring colorectal cancer recurrence post-surgery. "
+            "NOT recommended for primary cancer screening due to low specificity. "
+            "AFP (Alpha-Fetoprotein): Elevated in hepatocellular carcinoma (HCC) and testicular germ cell tumours. "
+            "AFP >400 ng/mL in cirrhotic patient: highly suspicious for HCC. "
+            "In testicular cancer: AFP elevated in yolk sac tumours and mixed germ cell tumours (NOT pure seminoma). "
+            "CA 19-9: Pancreatic and biliary cancer marker. >37 U/mL is elevated. "
+            "70-90% sensitive for pancreatic adenocarcinoma. Also elevated in cholestasis, pancreatitis, cholangitis. "
+            "Not expressed in Lewis antigen-negative individuals (5-10% of population — false negatives). "
+            "All tumour markers have LIMITED value for primary diagnosis — they are best for MONITORING known cancers."
+        ),
+        "source": "NCCN Guidelines (various); ASCO Tumour Marker Guidelines; Harrison's Ch. 73",
+        "tags": ["ca-125", "cea", "afp", "ca19-9", "ovarian", "colorectal", "liver", "pancreatic", "tumour marker"]
+    },
+    {
+        "id": "tumour_003",
+        "category": "Tumour Markers",
+        "title": "LDH and SPEP — Lymphoma and Myeloma Screening",
+        "content": (
+            "LDH (Lactate Dehydrogenase): Non-specific tissue damage marker. "
+            "Markedly elevated LDH with lymphadenopathy/B symptoms suggests lymphoma (especially DLBCL, Burkitt). "
+            "LDH is a component of the International Prognostic Index (IPI) for aggressive lymphoma. "
+            "Other causes of elevated LDH: haemolysis, MI, pulmonary embolism, liver disease, rhabdomyolysis, any malignancy. "
+            "SPEP (Serum Protein Electrophoresis): Detects monoclonal bands (M-protein/M-spike). "
+            "Presence of M-spike suggests: Multiple Myeloma, Waldenstrom macroglobulinemia, "
+            "MGUS (Monoclonal Gammopathy of Undetermined Significance), Amyloidosis. "
+            "If M-spike detected: quantify (>3 g/dL = likely myeloma), check serum free light chains, "
+            "urine for Bence-Jones protein, skeletal survey, bone marrow biopsy. "
+            "MGUS: M-protein <3 g/dL + bone marrow plasma cells <10% + no end-organ damage (CRAB criteria). "
+            "MGUS progresses to myeloma at ~1% per year — requires long-term monitoring."
+        ),
+        "source": "IMWG Diagnostic Criteria 2014; NCCN Myeloma Guidelines; Harrison's Ch. 107",
+        "tags": ["ldh", "spep", "lymphoma", "myeloma", "m-spike", "mgus", "tumour marker"]
+    },
+
+    # ================================================================
+    # GENETIC / HAEMATOLOGICAL MARKERS
+    # ================================================================
+    {
+        "id": "genetic_001",
+        "category": "Genetic / Haematology",
+        "title": "Haemoglobin Electrophoresis — Sickle Cell and Thalassemia Screening",
+        "content": (
+            "Haemoglobin electrophoresis / HPLC separates Hb variants: "
+            "Normal adult pattern: HbA 95-98%, HbA2 2.0-3.3%, HbF <2%. "
+            "Beta-Thalassemia Trait: HbA2 elevated (3.5-8%), HbF may be slightly elevated, mild microcytic anaemia. "
+            "Most common inherited anaemia in India — carrier rate 3-17% depending on community. "
+            "Beta-Thalassemia Major: HbF 60-90%, HbA absent or very low, severe anaemia requiring transfusions. "
+            "Sickle Cell Trait: HbS 20-40%, HbA 55-75%, usually asymptomatic. "
+            "Sickle Cell Disease: HbS >50% (usually 80-95%), HbF variable, severe haemolytic anaemia + vaso-occlusive crises. "
+            "India's tribal populations (central/eastern India) have sickle cell carrier rates of 10-35%. "
+            "Government of India launched National Sickle Cell Anaemia Elimination Mission (2023) for screening. "
+            "Genetic counselling essential: if both partners are carriers of same haemoglobinopathy, "
+            "25% chance of affected child. Pre-marital and antenatal screening recommended."
+        ),
+        "source": "ICMR Haemoglobinopathy Guidelines; WHO Sickle Cell Guidelines; Harrison's Ch. 94",
+        "tags": ["haemoglobin electrophoresis", "sickle cell", "thalassemia", "hba2", "hbf", "hbs", "genetic"]
+    },
+    {
+        "id": "genetic_002",
+        "category": "Genetic / Haematology",
+        "title": "G6PD Deficiency — Drug and Food-Induced Haemolysis",
+        "content": (
+            "G6PD deficiency is the most common enzyme deficiency worldwide (~400 million affected). "
+            "X-linked recessive — males predominantly affected; female carriers may have partial deficiency. "
+            "G6PD protects red blood cells from oxidative stress. Deficiency causes episodic haemolytic anaemia "
+            "triggered by oxidant drugs, infections, or fava beans. "
+            "Drugs to AVOID: primaquine (anti-malarial), dapsone, rasburicase, nitrofurantoin, "
+            "methylene blue, high-dose aspirin, sulfonamides. "
+            "Clinical presentation: acute haemolysis 24-72 hrs after trigger — dark urine, jaundice, anaemia, "
+            "reticulocytosis, elevated bilirubin, elevated LDH, low haptoglobin. "
+            "Diagnosis: G6PD quantitative assay — but may be falsely normal during acute haemolysis "
+            "(young reticulocytes have higher G6PD). Recheck 2-3 months after episode. "
+            "In India, prevalence varies 3-15% across different communities. "
+            "Neonatal jaundice is a major risk in G6PD-deficient newborns — can cause kernicterus if untreated."
+        ),
+        "source": "WHO G6PD Guidelines; British Journal of Haematology; Harrison's Ch. 94",
+        "tags": ["g6pd", "haemolysis", "enzyme deficiency", "drug safety", "genetic"]
+    },
+
+    # ================================================================
+    # COAGULATION PATTERNS
+    # ================================================================
+    {
+        "id": "coag_001",
+        "category": "Coagulation",
+        "title": "Coagulation Panel — PT/INR, aPTT, Fibrinogen Interpretation",
+        "content": (
+            "Coagulation screening panel interpretation: "
+            "Isolated prolonged PT/INR (normal aPTT): Factor VII deficiency, early warfarin effect, "
+            "early liver disease, mild Vitamin K deficiency. "
+            "Isolated prolonged aPTT (normal PT): Haemophilia A (Factor VIII) or B (Factor IX), "
+            "von Willebrand disease, heparin therapy, lupus anticoagulant (paradoxically thrombotic). "
+            "Both PT and aPTT prolonged: DIC, severe liver disease, supratherapeutic anticoagulation, "
+            "massive transfusion, common pathway deficiency (Factor X, V, II, fibrinogen). "
+            "DIC pattern: prolonged PT + aPTT + low fibrinogen + elevated D-dimer + low platelets + "
+            "schistocytes on smear. DIC is always secondary — treat the underlying cause (sepsis, malignancy, obstetric emergency). "
+            "D-dimer: sensitive but non-specific for thrombosis. <500 ng/mL effectively rules out DVT/PE "
+            "in low-risk patients (high negative predictive value). "
+            "INR therapeutic ranges: 2.0-3.0 for DVT/PE/AF; 2.5-3.5 for mechanical heart valves. "
+            "Fibrinogen <100 mg/dL = critical bleeding risk — consider cryoprecipitate transfusion."
+        ),
+        "source": "British Society for Haematology Coagulation Guidelines; ISTH DIC Criteria; Harrison's Ch. 78",
+        "tags": ["coagulation", "pt", "inr", "aptt", "fibrinogen", "d-dimer", "dic", "haemophilia", "warfarin"]
+    },
+
+    # ================================================================
+    # COMBINED PATTERNS (NEW — INFECTIOUS + TUMOUR)
+    # ================================================================
+    {
+        "id": "pattern_006",
+        "category": "Combined Analysis",
+        "title": "Sepsis Screening — CRP + Procalcitonin + WBC + Lactate Pattern",
+        "content": (
+            "Sepsis pattern recognition from lab panel: "
+            "WBC >12,000 or <4,000 + CRP >100 mg/L + Procalcitonin >2 ng/mL = high probability of bacterial sepsis. "
+            "Add elevated lactate (>2 mmol/L) = septic shock criteria per Sepsis-3 definition. "
+            "SOFA score components from labs: platelets, bilirubin, creatinine assess organ dysfunction. "
+            "qSOFA (bedside): altered mentation + SBP <100 + RR >22 — any 2 of 3 = high mortality risk. "
+            "Sepsis bundle (hour-1): blood cultures before antibiotics, broad-spectrum antibiotics, "
+            "IV fluids 30 mL/kg, measure lactate, repeat lactate if >2. "
+            "In Indian ICUs: sepsis mortality remains 40-60% — early recognition from lab patterns is critical. "
+            "A lab panel showing elevated WBC + CRP + PCT together has >90% positive predictive value for bacterial sepsis."
+        ),
+        "source": "Surviving Sepsis Campaign 2021; Sepsis-3 Consensus Definition; Harrison's Ch. 297",
+        "tags": ["sepsis", "crp", "procalcitonin", "wbc", "lactate", "combined"]
+    },
+    {
+        "id": "pattern_007",
+        "category": "Combined Analysis",
+        "title": "Tumour Marker Patterns — When to Suspect Malignancy",
+        "content": (
+            "Combined tumour marker patterns that raise suspicion: "
+            "Elevated PSA + elevated ALP + bone pain in elderly male → prostate cancer with bone metastases. "
+            "Elevated AFP + elevated liver enzymes + known cirrhosis → hepatocellular carcinoma. "
+            "Elevated CA 19-9 + obstructive jaundice + weight loss → pancreatic head carcinoma. "
+            "Elevated LDH + lymphadenopathy + B-symptoms (fever, night sweats, weight loss) → lymphoma. "
+            "M-spike on SPEP + bone pain + anaemia + hypercalcaemia + elevated creatinine (CRAB) → multiple myeloma. "
+            "Elevated CEA post-surgery (was normalized) → colorectal cancer recurrence. "
+            "CRITICAL: No tumour marker alone diagnoses cancer. All elevated markers require tissue diagnosis (biopsy). "
+            "Tumour markers are most valuable for: monitoring treatment response, detecting recurrence, and guiding prognosis."
+        ),
+        "source": "NCCN Guidelines; ASCO Tumour Marker Guidelines; Harrison's Ch. 73",
+        "tags": ["psa", "afp", "ca19-9", "ldh", "cea", "spep", "malignancy", "combined"]
+    },
+    {
+        "id": "pattern_008",
+        "category": "Combined Analysis",
+        "title": "DIC Pattern — Coagulopathy with Multi-Organ Involvement",
+        "content": (
+            "Disseminated Intravascular Coagulation (DIC) laboratory pattern: "
+            "Prolonged PT + prolonged aPTT + low fibrinogen (<150 mg/dL) + elevated D-dimer (>4x normal) + "
+            "thrombocytopenia (<100,000) + schistocytes on peripheral smear. "
+            "ISTH DIC scoring system: platelets + D-dimer + fibrinogen + PT prolongation = overt DIC if score ≥5. "
+            "Common triggers: sepsis (most common), major trauma, obstetric emergencies (placental abruption, "
+            "amniotic fluid embolism), acute promyelocytic leukaemia (APL), snake envenomation (common in India). "
+            "DIC is always SECONDARY — the primary disease must be identified and treated urgently. "
+            "Management: treat underlying cause, transfuse blood products only if active bleeding or procedure needed "
+            "(platelets if <50,000, cryoprecipitate if fibrinogen <100, FFP if PT/aPTT prolonged with bleeding). "
+            "Do NOT give heparin in acute DIC with bleeding — only consider in chronic DIC with thrombosis predominance."
+        ),
+        "source": "ISTH DIC Guidelines; British Society for Haematology; Harrison's Ch. 78",
+        "tags": ["dic", "coagulopathy", "d-dimer", "fibrinogen", "platelets", "sepsis", "combined"]
+    },
 ]
 
 
