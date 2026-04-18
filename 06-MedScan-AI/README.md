@@ -123,11 +123,11 @@ Tested against 100 findings (50 correct + 50 deliberately hallucinated):
 
 | Suite | Tests | Status |
 |-------|-------|--------|
-| Day 1: Extraction Engine | 4/4 | PASS |
-| Day 2: RAG Pipeline | 3/3 | PASS |
-| Day 3: LLM Analysis Engine | 5/5 | PASS |
-| Day 4: Red-Team Adversarial | 3/3 | PASS |
-| Day 5: Full Pipeline Validation | 5 reports | PASS |
+|  1: Extraction Engine | 4/4 | PASS |
+|  2: RAG Pipeline | 3/3 | PASS |
+|  3: LLM Analysis Engine | 5/5 | PASS |
+|  4: Red-Team Adversarial | 3/3 | PASS |
+|  5: Full Pipeline Validation | 5 reports | PASS |
 
 ---
 
