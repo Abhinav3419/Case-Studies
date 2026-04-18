@@ -1,12 +1,13 @@
 <div align="center">
 
-# `> Case-Studies <`
+<!-- Animated header -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:1A1A2E,100:6C3FC5&height=220&section=header&text=Case%20Studies&fontSize=72&fontColor=E8E8E8&animation=fadeIn&fontAlignY=35&desc=Product%20Strategy%20%E2%80%A2%20Innovation%20%E2%80%A2%20First%20Principles&descSize=16&descColor=8B949E&descAlignY=55" width="100%"/>
 
-### Product Strategy & Innovation Portfolio
+<br>
 
 [![GitHub](https://img.shields.io/badge/GitHub-Abhinav3419-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Abhinav3419)
 [![License](https://img.shields.io/badge/License-All_Rights_Reserved-DA3832?style=for-the-badge&logo=creativecommons&logoColor=white)](#)
-[![Case Studies](https://img.shields.io/badge/Case_Studies-05-6C3FC5?style=for-the-badge&logo=bookstack&logoColor=white)](#case-studies)
+[![Case Studies](https://img.shields.io/badge/Case_Studies-06-6C3FC5?style=for-the-badge&logo=bookstack&logoColor=white)](#case-studies)
 [![Status](https://img.shields.io/badge/Status-Active-00C853?style=for-the-badge&logo=statuspage&logoColor=white)](#)
 
 <br>
@@ -16,27 +17,30 @@
 
 <br>
 
----
+<!-- Domain pills -->
+![Product Management](https://img.shields.io/badge/Product_Management-232F3E?style=flat-square&logo=amazon&logoColor=white)
+![Applied Physics](https://img.shields.io/badge/Applied_Physics-1A6B3C?style=flat-square&logo=google&logoColor=white)
+![Behavioural Psych](https://img.shields.io/badge/Behavioural_Psychology-B20710?style=flat-square&logo=netflix&logoColor=white)
+![Sustainability](https://img.shields.io/badge/Sustainability-0078D4?style=flat-square&logo=microsoft&logoColor=white)
+![Automotive AI](https://img.shields.io/badge/Automotive_AI-1565C0?style=flat-square&logo=bmw&logoColor=white)
 
 </div>
 
-<br>
+---
+
+&nbsp;
 
 ## `// What will you get here?`
 
 A growing collection of original product case studies — each one solves a real problem for a real company using a unique lens that hasn't been tried before. No recycled frameworks. No textbook answers. Every solution here is built from first principles. Don't be surprised if these concepts start appearing in a Researcher's thesis without a citation—it's just that good.
 
-<br>
+&nbsp;
 
 ## `// Case Studies`
 
 <table>
 <tr>
-<td width="60">
-
-**`01`**
-
-</td>
+<td width="60" align="center"><b><code>01</code></b></td>
 <td>
 
 ### [Kindle: Physical Book Aesthetics](./01-Kindle-Physical-Book-Aesthetics/)
@@ -53,11 +57,7 @@ Six data-driven features that bridge the emotional gap between physical books an
 </td>
 </tr>
 <tr>
-<td width="60">
-
-**`02`**
-
-</td>
+<td width="60" align="center"><b><code>02</code></b></td>
 <td>
 
 ### [Project Sunroof 2.0: Atmospheric Correction](./02-PROJECT-SUNROOF-Variable-Correction-for-Improved-Efficiency/)
@@ -77,11 +77,7 @@ Corrects the fundamental Climatological Coefficient (Wc) in the solar energy equ
 </td>
 </tr>
 <tr>
-<td width="60">
-
-**`03`**
-
-</td>
+<td width="60" align="center"><b><code>03</code></b></td>
 <td>
 
 ### [Netflix: Sensory Personalization](./03-Netflix-Sensory-Personalization/)
@@ -98,11 +94,7 @@ Four context-aware features that extend personalization beyond the algorithm int
 </td>
 </tr>
 <tr>
-<td width="60">
-
-**`04`**
-
-</td>
+<td width="60" align="center"><b><code>04</code></b></td>
 <td>
 
 ### [Bio-Azure Symbiosis: Data Center × Bio-Foundry Heat Integration](./04-BioAzure-DataCenter-BioFoundry-Symbiosis/)
@@ -120,18 +112,14 @@ A complete implementation blueprint for co-locating precision fermentation bio-f
 </td>
 </tr>
 <tr>
-<td width="60">
-
-**`05`**
-
-</td>
+<td width="60" align="center"><b><code>05</code></b></td>
 <td>
 
 ### [The Ethos Intelligence Suite: Empathy-First Features for Luxury EVs](./05-Luxury-EV-Ethos-Intelligence-Suite/)
 
 **BMW / Mercedes / Porsche / Audi** · PM × Automotive AI × Sensory UX × Predictive Analytics
 
-> *"The future of luxury is not more screens. It’s more “Vibe”, even though you have to break-the-silence and “Rev” a few times."*
+> *"The future of luxury is not more screens. It's more "Vibe", even though you have to break-the-silence and "Rev" a few times."*
 
 Three novel modules for luxury EVs targeting the multi-generational household: **Acoustic Resurrection Engine** (generative V12 sound synthesis — not recordings), **Payload Oracle** (AI-powered weight-aware range prediction with actionable trade-off insights), and **Adaptive Guardian** (per-driver safety envelope that learns each family member's skill, blind spots, and driving patterns). Includes PRD framework, 3-phase GTM strategy with UBI insurance partnerships, and competitive analysis against Porsche Taycan, Tesla, and BMW current offerings.
 
@@ -141,52 +129,103 @@ Three novel modules for luxury EVs targeting the multi-generational household: *
 
 </td>
 </tr>
+<tr>
+<td width="60" align="center"><b><code>06</code></b></td>
+<td>
+
+### 🔜 Case Study #06
+
+*Coming soon...*
+
+<!-- PLACEHOLDER: Replace this block with the 6th case study details when ready -->
+
+</td>
+</tr>
 </table>
 
-<br>
+&nbsp;
 
 ## `// Repo Structure`
 
-```
-Case-Studies/
-│
-├── 01-Kindle-Physical-Book-Aesthetics/
-│   ├── README.md ............... case overview + solution summary
-│   ├── docs/case-study.docx .... full professional write-up
-│   ├── prototype/index.html .... interactive demo (open in browser)
-│   └── assets/feature-summary.md
-│
-├── 02-PROJECT-SUNROOF-Variable-Correction-for-Improved-Efficiency/
-│   ├── README.md ............... Pb + Mc atmospheric correction model
-│   ├── docs/case-study.docx .... full write-up with worked examples
-│   ├── prototype/index.html .... 3D Earth atmospheric visualizer
-│   └── assets/formula-reference.md
-│
-├── 03-Netflix-Sensory-Personalization/
-│   ├── README.md ............... four context-aware features
-│   ├── docs/case-study.docx .... full write-up with RICE prioritization
-│   └── assets/feature-reference.md
-│
-├── 04-BioAzure-DataCenter-BioFoundry-Symbiosis/
-│   ├── README.md ............... DC × bio-foundry heat integration
-│   ├── docs/case-study.docx .... full write-up with PM blueprint
-│   ├── docs/presentation.pptx .. research-backed pitch deck
-│   └── assets/thermal-mapping.md
-│
-├── 05-Luxury-EV-Ethos-Intelligence-Suite/
-│   ├── README.md ............... 3 empathy-first EV modules
-│   ├── docs/case-study.docx .... full 7-page write-up with GTM + PRD
-│   └── assets/feature-reference.md
-│
-└── ... (next case study loading...)
-```
+<table>
+<tr>
+<td>
 
-<br>
+<details open>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>Case-Studies</b></summary>
+<blockquote>
+
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code><br>
+&nbsp;📄&nbsp;&nbsp;<code>.gitignore</code><br>
+&nbsp;📄&nbsp;&nbsp;<code>LICENSE</code>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>01-Kindle-Physical-Book-Aesthetics</b>&nbsp;&nbsp;<sup>Amazon · Product Management</sup></summary>
+<blockquote>
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;case overview + solution summary<br>
+&nbsp;📁&nbsp;&nbsp;<code>docs/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>case-study.docx</code> full professional write-up<br>
+&nbsp;🌐&nbsp;&nbsp;<code>prototype/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>index.html</code> interactive demo<br>
+&nbsp;📋&nbsp;&nbsp;<code>assets/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>feature-summary.md</code>
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>02-PROJECT-SUNROOF-Variable-Correction</b>&nbsp;&nbsp;<sup>Google · Applied Physics</sup></summary>
+<blockquote>
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;Pb + Mc atmospheric correction model<br>
+&nbsp;📁&nbsp;&nbsp;<code>docs/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>case-study.docx</code> full write-up with worked examples<br>
+&nbsp;🌐&nbsp;&nbsp;<code>prototype/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>index.html</code> 3D Earth atmospheric visualizer<br>
+&nbsp;📋&nbsp;&nbsp;<code>assets/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>formula-reference.md</code>
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>03-Netflix-Sensory-Personalization</b>&nbsp;&nbsp;<sup>Netflix · Behavioural Psychology</sup></summary>
+<blockquote>
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;four context-aware features<br>
+&nbsp;📁&nbsp;&nbsp;<code>docs/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>case-study.docx</code> full write-up with RICE prioritization<br>
+&nbsp;📋&nbsp;&nbsp;<code>assets/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>feature-reference.md</code>
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>04-BioAzure-DataCenter-BioFoundry-Symbiosis</b>&nbsp;&nbsp;<sup>Microsoft · Sustainability</sup></summary>
+<blockquote>
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;DC × bio-foundry heat integration<br>
+&nbsp;📁&nbsp;&nbsp;<code>docs/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>case-study.docx</code> + <code>presentation.pptx</code><br>
+&nbsp;📋&nbsp;&nbsp;<code>assets/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>thermal-mapping.md</code>
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>05-Luxury-EV-Ethos-Intelligence-Suite</b>&nbsp;&nbsp;<sup>BMW / Mercedes · Automotive AI</sup></summary>
+<blockquote>
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;3 empathy-first EV modules<br>
+&nbsp;📁&nbsp;&nbsp;<code>docs/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>case-study.docx</code> full 7-page write-up with GTM + PRD<br>
+&nbsp;📋&nbsp;&nbsp;<code>assets/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>feature-reference.md</code>
+</blockquote>
+</details>
+
+<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>06-???</b></summary>
+<blockquote>
+&nbsp;🔜&nbsp;&nbsp;<i>next case study loading...</i>
+</blockquote>
+</details>
+
+</blockquote>
+</details>
+
+</td>
+</tr>
+</table>
+
+&nbsp;
 
 ## `// Frameworks Used`
 
 | Framework | What it does | Where |
-|:----------|:-------------|:------|
+|:---|:---|:---|
 | `CIRCLES` | Structured product feature design | `#01` `#03` |
 | `RICE` | Data-driven feature prioritization | `#01` `#03` |
 | `Physics-First Strategy` | Science-grounded product improvement | `#02` |
@@ -197,17 +236,21 @@ Case-Studies/
 | `Empathy-First Strategy` | Human-centered automotive feature design (Sound, Utility, Safety) | `#05` |
 | `PRD + GTM Framework` | Product requirements + go-to-market for OEM feature suite | `#05` |
 
-<br>
-
-
-<div align="center">
+&nbsp;
 
 ---
 
+<div align="center">
+
 **Built with curiosity. Shipped with conviction.**
 
+&nbsp;
+
 [![GitHub](https://img.shields.io/badge/Follow-@Abhinav3419-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Abhinav3419)
+[![LinkedIn](https://img.shields.io/badge/Connect-abhinavpandey--ai--ml-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/abhinavpandey-ai-ml)
 
 *Copyright © 2026 Abhinav Pandey. All rights reserved.*
 
 </div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:1A1A2E,100:6C3FC5&height=120&section=footer" width="100%"/>
