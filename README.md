@@ -23,6 +23,7 @@
 ![Behavioural Psych](https://img.shields.io/badge/Behavioural_Psychology-B20710?style=flat-square&logo=netflix&logoColor=white)
 ![Sustainability](https://img.shields.io/badge/Sustainability-0078D4?style=flat-square&logo=microsoft&logoColor=white)
 ![Automotive AI](https://img.shields.io/badge/Automotive_AI-1565C0?style=flat-square&logo=bmw&logoColor=white)
+![Healthcare AI](https://img.shields.io/badge/Healthcare_AI-00897B?style=flat-square&logo=tensorflow&logoColor=white)
 
 </div>
 
@@ -133,11 +134,18 @@ Three novel modules for luxury EVs targeting the multi-generational household: *
 <td width="60" align="center"><b><code>06</code></b></td>
 <td>
 
-### 🔜 Case Study #06
+### [MedScan-AI: Intelligent Clinical Lab Report Analyzer](./06-MedScan-AI/)
 
-*Coming soon...*
+**Healthcare AI** · RAG × Multi-Agent Verification × PDF Intelligence × Anti-Hallucination
 
-<!-- PLACEHOLDER: Replace this block with the 6th case study details when ready -->
+> *"Between getting your lab report and seeing your clinician, there's a gap — filled with anxiety and Google rabbit holes. MedScan-AI closes that gap. It reads the numbers the way a clinician does, and explains them the way a friend would."*
+
+An end-to-end clinical lab report analyzer that ingests PDF reports, extracts biomarker data across **88 markers** (CBC, lipid panel, thyroid, tumour markers, coagulation), and maps findings to validated medical interpretations using a RAG pipeline with multi-agent verification. Built with anti-hallucination safeguards, anatomical grounding, radiology parsing, and red-team tested for safety.
+
+![Architecture](https://img.shields.io/badge/RAG_Pipeline-Multi--Agent-00897B?style=flat-square)
+![Biomarkers](https://img.shields.io/badge/88_Biomarkers-5_Report_Types-6C3FC5?style=flat-square)
+![Safety](https://img.shields.io/badge/Anti--Hallucination-Red_Team_Tested-DA3832?style=flat-square)
+![Domain](https://img.shields.io/badge/Healthcare_AI-00897B?style=flat-square&logo=tensorflow&logoColor=white)
 
 </td>
 </tr>
@@ -207,7 +215,21 @@ Three novel modules for luxury EVs targeting the multi-generational household: *
 </details>
 
 <details>
-<summary>&nbsp;📂&nbsp;&nbsp;<b>06-???</b></summary>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>06-MedScan-AI</b>&nbsp;&nbsp;<sup>Healthcare AI · RAG · Multi-Agent</sup></summary>
+<blockquote>
+&nbsp;📄&nbsp;&nbsp;<code>README.md</code>&nbsp;&nbsp;—&nbsp;&nbsp;architecture + pipeline overview<br>
+&nbsp;🐍&nbsp;&nbsp;<code>app.py</code>&nbsp;&nbsp;—&nbsp;&nbsp;Streamlit application<br>
+&nbsp;📦&nbsp;&nbsp;<code>requirements.txt</code><br>
+&nbsp;📁&nbsp;&nbsp;<code>src/</code>&nbsp;&nbsp;—&nbsp;&nbsp;pdf_extractor · rag_pipeline · llm_engine · medical_verifier · radiology_parser<br>
+&nbsp;📁&nbsp;&nbsp;<code>data/</code>&nbsp;&nbsp;—&nbsp;&nbsp;5 sample lab reports (CBC, lipid, thyroid, tumour, coagulation)<br>
+&nbsp;📁&nbsp;&nbsp;<code>docs/</code>&nbsp;&nbsp;—&nbsp;&nbsp;architecture diagrams (PNG + SVG)<br>
+&nbsp;📁&nbsp;&nbsp;<code>config/</code>&nbsp;&nbsp;—&nbsp;&nbsp;<code>settings.json</code><br>
+&nbsp;🧪&nbsp;&nbsp;<code>tests/</code>&nbsp;&nbsp;—&nbsp;&nbsp;extraction · RAG · LLM · validation · red-team tests
+</blockquote>
+</details>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<details>
+<summary>&nbsp;📂&nbsp;&nbsp;<b>07-???</b></summary>
 <blockquote>
 &nbsp;🔜&nbsp;&nbsp;<i>next case study loading...</i>
 </blockquote>
@@ -235,6 +257,7 @@ Three novel modules for luxury EVs targeting the multi-generational household: *
 | `Industrial Symbiosis` | Cross-industry resource optimization (heat, water, compute) | `#04` |
 | `Empathy-First Strategy` | Human-centered automotive feature design (Sound, Utility, Safety) | `#05` |
 | `PRD + GTM Framework` | Product requirements + go-to-market for OEM feature suite | `#05` |
+| `RAG + Multi-Agent Verification` | Retrieval-augmented generation with anti-hallucination safeguards | `#06` |
 
 &nbsp;
 
